@@ -9,25 +9,31 @@ import java.io.File;
 import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 //bob was here 1/15
 
 public class SwerveSub extends SubsystemBase {
   SwerveDrive m_swerve;
+
   /** Creates a new SwerveSub. */
   public SwerveSub() {
     final double maximumSpeed = Units.feetToMeters(4.5);
-    File Directory = new File(Filesystem.getDeployDirectory(), "swerve");
+    File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
-      m_swerve = new SwerveParser(Directory).createSwerveDrive(maximumSpeed);
+      m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
       System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
     }
   }
 
-public void control (){
-  
-}
+  public void control(double xVelo, double yVelo, double rotVelo) {
+
+    ChassisSpeeds velocity = new ChassisSpeeds(xVelo, yVelo, rotVelo);
+    m_swerve.drive(velocity);
+
+  }
+
   @Override
   public void periodic() {
 
