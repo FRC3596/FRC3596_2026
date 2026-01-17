@@ -21,18 +21,20 @@ public class SwerveSub extends SubsystemBase {
     final double maximumSpeed = Units.feetToMeters(4.5);
     File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
+      //loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
       System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
     }
   }
-
+//X and Y velos = meters/second, rotational velo = radians/second
   public void control(double xVelo, double yVelo, double rotVelo) {
 
     ChassisSpeeds velocity = new ChassisSpeeds(xVelo, yVelo, rotVelo);
     m_swerve.drive(velocity);
 
   }
+
 
   @Override
   public void periodic() {

@@ -6,10 +6,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.XboxDrive;
+import frc.robot.subsystems.SwerveSub;
+import frc.robot.utils.Constants;
+
 
 public class RobotContainer {
+  
+
+ SwerveSub swerve = new SwerveSub();
+ CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
+XboxDrive teleopDriveCommand = new XboxDrive(swerve, xboxController);
+
   public RobotContainer() {
     configureBindings();
+    swerve.setDefaultCommand(teleopDriveCommand);
   }
 
   private void configureBindings() {}

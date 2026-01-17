@@ -2,13 +2,13 @@ package frc.robot.utils;
 
 public class Constants {
 
-    class DriverStation {
+    public class DriverStation {
         public static final int xboxControllerID = 0;
         public static final int leftFlightStickID = 1;
         public static final int rightFlightStickID = 2;
     }
 
-    class CANBus {
+    public class CANBus {
         // TODO Drive 1-10
         public static final int FRAngle = 0;
         public static final int FRDrive = 0;
