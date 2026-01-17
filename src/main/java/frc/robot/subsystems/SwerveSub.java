@@ -9,6 +9,7 @@ import java.io.File;
 import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 //bob was here 1/15
@@ -34,7 +35,10 @@ public class SwerveSub extends SubsystemBase {
     m_swerve.drive(velocity);
 
   }
+public Rotation2d getYaw(){
+return m_swerve.getOdometryHeading();
 
+}
 
   @Override
   public void periodic() {
