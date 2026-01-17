@@ -6,6 +6,7 @@ package frc.robot.subsystem;
 
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utils.Constants;
 import frc.robot.utils.LimelightHelpers;
 
 public class LimeLightSub extends SubsystemBase {
@@ -13,12 +14,12 @@ public class LimeLightSub extends SubsystemBase {
   public LimeLightSub() {
 
     LimelightHelpers.setCameraPose_RobotSpace("",
-        0.5, // Forward offset (meters)
-        0.0, // Side offset (meters)
-        0.5, // Height offset (meters)
-        0.0, // Roll (degrees)
-        30.0, // Pitch (degrees)
-        0.0 // Yaw (degrees)
+        Constants.LimeLight.ForwardOffset, // Forward offset (meters)
+        Constants.LimeLight.SideOffset, // Side offset (meters)
+        Constants.LimeLight.HeightOffset, // Height offset (meters)
+        Constants.LimeLight.RollOffset, // Roll (degrees)
+        Constants.LimeLight.PitchOffset, // Pitch (degrees)
+        Constants.LimeLight.YawOffset // Yaw (degrees)
     );
 
     // Basic targeting data

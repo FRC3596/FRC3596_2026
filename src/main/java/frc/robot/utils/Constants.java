@@ -2,13 +2,13 @@ package frc.robot.utils;
 
 public class Constants {
 
-    class DriverStation {
+    public class DriverStation {
         public static final int xboxControllerID = 0;
         public static final int leftFlightStickID = 1;
         public static final int rightFlightStickID = 2;
     }
 
-    class CANBus {
+    public class CANBus {
         // TODO Drive 1-10
         public static final int FRAngle = 0;
         public static final int FRDrive = 0;
@@ -32,5 +32,15 @@ public class Constants {
         public static final int L2Climb = 42;
         public static final int R1Climb = 43;
         public static final int R2Climb = 44;
+    }
+    public class LimeLight {
+
+        public static final double ForwardOffset = 0.5;
+        public static final double SideOffset = 0.0;
+        public static final double HeightOffset = 0.5;
+        public static final double RollOffset = 0.0;
+        public static final double PitchOffset = 30.0;
+        public static final double YawOffset = 0.0;
+
     }
 }
