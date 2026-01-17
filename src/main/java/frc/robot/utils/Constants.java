@@ -2,13 +2,13 @@ package frc.robot.utils;
 
 public class Constants {
 
-    class DriverStation {
+    public class DriverStation {
         public static final int xboxControllerID = 0;
         public static final int leftFlightStickID = 1;
         public static final int rightFlightStickID = 2;
     }
 
-    class CANBus {
+    public class  CANBus {
         // TODO Drive 1-10
         public static final int FRAngle = 0;
         public static final int FRDrive = 0;
@@ -32,5 +32,14 @@ public class Constants {
         public static final int L2Climb = 42;
         public static final int R1Climb = 43;
         public static final int R2Climb = 44;
+    }
+    public class ManipulatorSpeeds {
+        public static final double autoAgitatorSpeed = 0.5;
+        public static final double autoIntakeSpeed = 0.5;
+        public static final double autoShooterSpeed = 0.5;
+
+        public static final double teleopAgitatorSpeed = 0.7;
+        public static final double teleopIntakeSpeed = 0.7;
+        public static final double teleopShooterSpeed = 0.7;
     }
 }
