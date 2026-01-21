@@ -10,7 +10,7 @@ public class Constants {
 
     public class CANBus {
         // TODO Drive 1-10
-        public static final int FRAngle = 0;
+        public static final int FRAngle = 2;
         public static final int FRDrive = 0;
         public static final int FLAngle = 0;
         public static final int FLDrive = 0;
