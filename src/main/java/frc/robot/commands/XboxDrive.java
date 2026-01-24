@@ -31,7 +31,7 @@ addRequirements(swerve);
   // XBox controller controls swerve modules
   @Override
   public void execute() {
-    swerve.control(xboxController.getLeftX(),-xboxController.getLeftY(),xboxController.getRightX());
+    swerve.control(xboxController.getRightX(),-xboxController.getRightY(),xboxController.getLeftX());
   }
 
   // Called once the command ends or is interrupted.
