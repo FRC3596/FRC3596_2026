@@ -9,13 +9,15 @@ import java.io.File;
 import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
+import swervelib.imu.SwerveIMU;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 //bob was here 1/15
 
 public class SwerveSub extends SubsystemBase {
-  SwerveDrive m_swerve;
+  private SwerveDrive m_swerve;
+  public static SwerveDrive publicSwerve;
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
@@ -24,6 +26,7 @@ public class SwerveSub extends SubsystemBase {
     try {
       //loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
+      publicSwerve = m_swerve;
     } catch (Exception e) {
       System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
     }
@@ -33,10 +36,10 @@ public class SwerveSub extends SubsystemBase {
 
     ChassisSpeeds velocity = new ChassisSpeeds(xVelo, yVelo, rotVelo);
     m_swerve.drive(velocity);
-
+    
   }
-public Rotation2d getYaw(){
-return m_swerve.getOdometryHeading();
+public Rotation2d getGyro(){
+return m_swerve.getYaw();
 
 }
 
