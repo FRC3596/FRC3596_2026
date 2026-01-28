@@ -32,7 +32,8 @@ public class Constants {
         public static final int L2Climb = 42;
         public static final int R1Climb = 43;
         public static final int R2Climb = 44;
-    }
+        public static final int colorSensor = 45;
+    } 
     public class ManipulatorSpeeds {
         public static final double autoAgitatorSpeed = 0.5;
         public static final double autoIntakeSpeed = 0.5;
