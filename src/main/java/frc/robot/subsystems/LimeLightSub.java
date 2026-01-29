@@ -8,6 +8,8 @@ import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 import frc.robot.utils.LimelightHelpers;
+import frc.robot.utils.LimelightHelpers.RawDetection;
+import frc.robot.utils.LimelightHelpers.RawFiducial;
 
 public class LimeLightSub extends SubsystemBase {
   boolean doRejectUpdate = false;
@@ -75,5 +77,30 @@ public class LimeLightSub extends SubsystemBase {
           mt2.pose,
           mt2.timestampSeconds);
      }
+         // Get raw AprilTag/Fiducial data
+RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("");
+for (RawFiducial fiducial : fiducials) {
+    int id = fiducial.id;                    // Tag ID
+    double txnc = fiducial.txnc;             // X offset (no crosshair)
+    double tync = fiducial.tync;             // Y offset (no crosshair)
+    double ta = fiducial.ta;                 // Target area
+    double distToCamera = fiducial.distToCamera;  // Distance to camera
+    double distToRobot = fiducial.distToRobot;    // Distance to robot
+    double ambiguity = fiducial.ambiguity;   // Tag pose ambiguity
+}
+
+// Get raw neural detector results
+RawDetection[] detections = LimelightHelpers.getRawDetections("");
+    for (RawDetection detection : detections) {
+      int classID = detection.classId;
+      double txnc = detection.txnc;
+      double tync = detection.tync;
+      double ta = detection.ta;
+      // Access corner coordinates if needed
+      double corner0X = detection.corner0_X;
+      double corner0Y = detection.corner0_Y;
+    // ... corners 1-3 available similarly
+    }
+    
   }
 }
