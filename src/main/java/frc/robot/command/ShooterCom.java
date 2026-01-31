@@ -16,7 +16,7 @@ public class ShooterCom extends Command {
   /** Creates a new ShooterCom. */
   public ShooterCom(ShooterSub shooterSub) {
     m_shooterSub = shooterSub;
-    m_speed = Constants.ManipulatorSpeeds.autoShooterSpeed;
+    m_speed = Constants.Manipulator.autoShooterSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooterSub);
   }

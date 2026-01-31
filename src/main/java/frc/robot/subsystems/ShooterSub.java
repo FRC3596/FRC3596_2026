@@ -39,7 +39,7 @@ public class ShooterSub extends SubsystemBase {
   }
   public void motorVeloSet(double speedRPM){
 
-    PIDLS.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity)
+    PIDLS.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
   }
 
 }

@@ -34,10 +34,15 @@ public class Constants {
         public static final int R2Climb = 44;
         public static final int colorSensor = 45;
     } 
-    public class ManipulatorSpeeds {
-        public static final double autoAgitatorSpeed = 0.5;
-        public static final double autoIntakeSpeed = 0.5;
-        public static final double autoShooterSpeed = 0.5;
+    public class Manipulator{
+        // public static final double autoAgitatorSpeed = 0.5;
+        // public static final double autoIntakeSpeed = 0.5;
+        // public static final double autoShooterSpeed = 0.5;
+         public static final double shooterProportion = 0;
+         public static final double shooterIntegral = 0;
+        public static final double shooterDerivative = 0;
+       
+
 
         public static final double teleopAgitatorSpeed = 0.7;
         public static final double teleopIntakeSpeed = 0.7;
