@@ -10,14 +10,18 @@ import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
 import swervelib.imu.SwerveIMU;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
 //bob was here 1/15
 
 public class SwerveSub extends SubsystemBase {
   private SwerveDrive m_swerve;
-  public static SwerveDrive publicSwerve;
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
@@ -26,7 +30,6 @@ public class SwerveSub extends SubsystemBase {
     try {
       //loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
-      publicSwerve = m_swerve;
     } catch (Exception e) {
       System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
     }
@@ -38,14 +41,24 @@ public class SwerveSub extends SubsystemBase {
     m_swerve.drive(velocity);
     
   }
-public Rotation2d getGyro(){
-return m_swerve.getYaw();
 
-}
+  public double getGyroDeg() {
 
+  return m_swerve.getYaw().getDegrees();
+  }
+
+  public void addVisionMeasure(Pose2d botpose, double timeSeconds) {
+    m_swerve.addVisionMeasurement(botpose, timeSeconds);
+
+  }
+  public double getAngularVelocity() {
+    return m_swerve.getGyro().getYawAngularVelocity().magnitude();
+  }
+  public void setVisionMeasurementStdDevs(Matrix<N3, N1> stdDevs) {
+    m_swerve.setVisionMeasurementStdDevs(stdDevs);
+  }
   @Override
   public void periodic() {
-
     // This method will be called once per scheduler runs
   }
 }

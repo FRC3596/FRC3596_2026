@@ -12,11 +12,12 @@ import frc.robot.utils.LimelightHelpers.RawDetection;
 import frc.robot.utils.LimelightHelpers.RawFiducial;
 
 public class LimeLightSub extends SubsystemBase {
+  private SwerveSub m_swerveSub;
   boolean doRejectUpdate = false;
   
   /** Creates a new LimeLightSub. */
-  public LimeLightSub() {
-
+  public LimeLightSub(SwerveSub swerveSub) {
+    m_swerveSub = swerveSub;
     LimelightHelpers.setCameraPose_RobotSpace("",
         Constants.LimeLight.ForwardOffset, // Forward offset (meters)
         Constants.LimeLight.SideOffset, // Side offset (meters)
@@ -43,64 +44,40 @@ public class LimeLightSub extends SubsystemBase {
   @Override
   public void periodic() {
     // First, tell Limelight your robot's current orientation
-    double robotYaw = SwerveSub.publicSwerve.getYaw().getDegrees();
+    double robotYaw = m_swerveSub.getGyroDeg();
     LimelightHelpers.SetRobotOrientation("", robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     // Get the pose estimate
     LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("");
 
     // Add it to your pose estimator
-    SwerveSub.publicSwerve.setVisionMeasurementStdDevs(VecBuilder.fill(.5, .5,
+    m_swerveSub.setVisionMeasurementStdDevs(VecBuilder.fill(.5, .5,
         9999999));
-    SwerveSub.publicSwerve.addVisionMeasurement(
+    m_swerveSub.addVisionMeasure(
         limelightMeasurement.pose,
         limelightMeasurement.timestampSeconds);
     // This method will be called once per scheduler run
 
     //keep an eye on the "SwerveSub.publicSwerve.getYaw().getDegrees()" part may not be what we need
-    LimelightHelpers.SetRobotOrientation("limelight", SwerveSub.publicSwerve.getYaw().getDegrees(),
+    LimelightHelpers.SetRobotOrientation("limelight", m_swerveSub.getGyroDeg(),
         0, 0, 0, 0, 0);
     LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
 
     // if our angular velocity is greater than 360 degrees per second, ignore vision
     // updates
     //keep an eye on this value it may or may not be what we need
-    if (Math.abs(SwerveSub.publicSwerve.getGyro().getYawAngularVelocity().magnitude()) > 360) {
+    if (Math.abs(m_swerveSub.getAngularVelocity()) > 360) {
       doRejectUpdate = true;
     }
     if (mt2.tagCount == 0) {
       doRejectUpdate = true;
     }
     if (!doRejectUpdate) {
-      SwerveSub.publicSwerve.setVisionMeasurementStdDevs(VecBuilder.fill(.7, .7, 9999999));
-      SwerveSub.publicSwerve.addVisionMeasurement(
+      m_swerveSub.setVisionMeasurementStdDevs(VecBuilder.fill(.7, .7, 9999999));
+      m_swerveSub.addVisionMeasure(
           mt2.pose,
           mt2.timestampSeconds);
      }
-         // Get raw AprilTag/Fiducial data
-RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("");
-for (RawFiducial fiducial : fiducials) {
-    int id = fiducial.id;                    // Tag ID
-    double txnc = fiducial.txnc;             // X offset (no crosshair)
-    double tync = fiducial.tync;             // Y offset (no crosshair)
-    double ta = fiducial.ta;                 // Target area
-    double distToCamera = fiducial.distToCamera;  // Distance to camera
-    double distToRobot = fiducial.distToRobot;    // Distance to robot
-    double ambiguity = fiducial.ambiguity;   // Tag pose ambiguity
-}
 
-// Get raw neural detector results
-RawDetection[] detections = LimelightHelpers.getRawDetections("");
-    for (RawDetection detection : detections) {
-      int classID = detection.classId;
-      double txnc = detection.txnc;
-      double tync = detection.tync;
-      double ta = detection.ta;
-      // Access corner coordinates if needed
-      double corner0X = detection.corner0_X;
-      double corner0Y = detection.corner0_Y;
-    // ... corners 1-3 available similarly
-    }
-    
   }
 }
