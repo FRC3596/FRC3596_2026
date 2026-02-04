@@ -25,13 +25,13 @@ public class SwerveSub extends SubsystemBase {
       //loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
-      System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
+      System.out.println("The swerve did not generate; womp womp !!!!!!!!!!!!! :( :( :( ");
     }
   }
 //X and Y velos = meters/second, rotational velo = radians/second
   public void control(double xVelo, double yVelo, double rotVelo) {
 
-    ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo);
+    ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo); //(considering adding 2.22 multiplyer to rotvelo)
     m_swerve.drive(velocity);
 
   }
