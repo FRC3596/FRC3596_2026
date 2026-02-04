@@ -5,6 +5,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 import frc.robot.utils.LimelightHelpers;
@@ -78,6 +82,8 @@ public class LimeLightSub extends SubsystemBase {
           mt2.pose,
           mt2.timestampSeconds);
      }
-
+     SmartDashboard.putNumber("LimeLight Pose X", mt2.pose.getX());
+     SmartDashboard.putNumber("LimeLight Pose Y", mt2.pose.getY());
+     SmartDashboard.putNumber("LimeLight Pose Theta", mt2.pose.getRotation().getDegrees());
   }
 }
