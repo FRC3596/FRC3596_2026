@@ -33,6 +33,7 @@ public class Constants {
         public static final int R1Climb = 43;
         public static final int R2Climb = 44;
         public static final int colorSensor = 45;
+        public static final int Shooter = 0;
     } 
     public class Manipulator{
         // public static final double autoAgitatorSpeed = 0.5;
