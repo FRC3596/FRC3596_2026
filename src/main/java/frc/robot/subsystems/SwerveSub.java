@@ -31,7 +31,7 @@ public class SwerveSub extends SubsystemBase {
 //X and Y velos = meters/second, rotational velo = radians/second
   public void control(double xVelo, double yVelo, double rotVelo) {
 
-    ChassisSpeeds velocity = new ChassisSpeeds(xVelo, yVelo, rotVelo);
+    ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo);
     m_swerve.drive(velocity);
 
   }
