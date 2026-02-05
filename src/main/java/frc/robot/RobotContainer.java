@@ -18,10 +18,11 @@ public class RobotContainer {
   private final SwerveSub swerve = new SwerveSub();
   private final CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   private final XboxDrive teleopDriveCommand = new XboxDrive(swerve, xboxController);
-  private final LimeLightSub limeLight = new LimeLightSub(swerve);
+  private final LimeLightSub limelight = new LimeLightSub(swerve);
 
 
   public RobotContainer() {
+    
     configureBindings();
     swerve.setDefaultCommand(teleopDriveCommand);
   }
