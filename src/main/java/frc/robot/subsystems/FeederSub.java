@@ -18,19 +18,17 @@ import edu.wpi.first.units.measure.Velocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
-public class ShooterSub extends SubsystemBase {
-  private final SparkMax shooter = new SparkMax(Constants.CANBus.shooter, MotorType.kBrushless);
-  private SparkMaxConfig shooterConfig = new SparkMaxConfig();
+public class FeederSub extends SubsystemBase {
+  private final SparkMax feeder = new SparkMax(Constants.CANBus.feeder, MotorType.kBrushless);
+  private SparkMaxConfig feederConfig = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
-  private final SparkClosedLoopController PID = shooter.getClosedLoopController();
+  private final SparkClosedLoopController PID = feeder.getClosedLoopController();
 
-  /** Creates a new ShooterSub. */
-  public ShooterSub() {
-    shooterConfig.apply(PIDConfig);
-    shooter.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-    PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
-        Constants.Manipulator.shooterDerivative);
-
+  public FeederSub() {
+    feederConfig.apply(PIDConfig);
+    feeder.configure(feederConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    PIDConfig.pid(Constants.Manipulator.feederProportion, Constants.Manipulator.feederIntegral,
+        Constants.Manipulator.feederDerivative);
   }
 
   @Override
@@ -38,13 +36,12 @@ public class ShooterSub extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void runShooter(double speed) {
-    shooter.set(speed);
+  public void runFeeder(double speed) {
+    feeder.set(speed);
   }
 
   public void motorVeloSet(double speedRPM) {
 
     PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
   }
-
 }

@@ -9,18 +9,19 @@ import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class StorageSub extends SubsystemBase {
-  private final SparkMax LAgitator = new SparkMax(Constants.CANBus.LAgitator, MotorType.kBrushless);
-  private final SparkMax RAgitator = new SparkMax(Constants.CANBus.RAgitator, MotorType.kBrushless);
-  private SparkBaseConfig LAConfig;
+  private final SparkMax agitator = new SparkMax(Constants.CANBus.agitator, MotorType.kBrushless);
+ 
+  private SparkMaxConfig agitatorConfig = new SparkMaxConfig();
   /** Creates a new StorageSub. */
   public StorageSub() {
-    LAConfig.follow(RAgitator);
-    LAgitator.configure(LAConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    
+    agitator.configure(agitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
   }
 
@@ -31,6 +32,6 @@ public class StorageSub extends SubsystemBase {
 
 
   public void runAgitator(double speed){
-    LAgitator.set(speed);
+    agitator.set(speed);
   }
 }
