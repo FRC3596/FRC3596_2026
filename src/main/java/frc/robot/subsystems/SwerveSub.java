@@ -22,6 +22,7 @@ import edu.wpi.first.math.util.Units;
 
 public class SwerveSub extends SubsystemBase {
   private SwerveDrive m_swerve;
+  public static double robotYaw;
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
@@ -31,7 +32,7 @@ public class SwerveSub extends SubsystemBase {
       //loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
-      System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
+      e.printStackTrace();
     }
   }
 //X and Y velos = meters/second, rotational velo = radians/second
@@ -59,6 +60,7 @@ public class SwerveSub extends SubsystemBase {
   }
   @Override
   public void periodic() {
+    robotYaw = getGyroDeg();
     // This method will be called once per scheduler runs
   }
 }

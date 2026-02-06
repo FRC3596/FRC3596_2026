@@ -31,8 +31,12 @@ public class LimeLightSub extends SubsystemBase {
         Constants.LimeLight.YawOffset // Yaw (degrees)
     );
 
-    
-    // Basic targeting data
+    LimelightHelpers.setLEDMode_ForceOff("");
+  }
+
+  @Override
+  public void periodic() {
+        // Basic targeting data
     double tx = LimelightHelpers.getTX(""); // Horizontal offset from crosshair to target in degrees
     double ty = LimelightHelpers.getTY(""); // Vertical offset from crosshair to target in degrees
     double ta = LimelightHelpers.getTA(""); // Target area (0% to 100% of image)
@@ -41,14 +45,8 @@ public class LimeLightSub extends SubsystemBase {
     double txnc = LimelightHelpers.getTXNC(""); // Horizontal offset from principal pixel/point to target in degrees
     double tync = LimelightHelpers.getTYNC(""); // Vertical offset from principal pixel/point to target in degrees
 
-    LimelightHelpers.setLEDMode_ForceOff("");
-
-  }
-
-  @Override
-  public void periodic() {
     // First, tell Limelight your robot's current orientation
-    double robotYaw = m_swerveSub.getGyroDeg();
+    double robotYaw = SwerveSub.robotYaw;
     LimelightHelpers.SetRobotOrientation("", robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
 
     // Get the pose estimate
@@ -57,10 +55,12 @@ public class LimeLightSub extends SubsystemBase {
     // Add it to your pose estimator
     m_swerveSub.setVisionMeasurementStdDevs(VecBuilder.fill(.5, .5,
         9999999));
+    if(hasTarget){
     m_swerveSub.addVisionMeasure(
         limelightMeasurement.pose,
         limelightMeasurement.timestampSeconds);
     // This method will be called once per scheduler run
+    
 
     //keep an eye on the "SwerveSub.publicSwerve.getYaw().getDegrees()" part may not be what we need
     LimelightHelpers.SetRobotOrientation("limelight", m_swerveSub.getGyroDeg(),
@@ -85,5 +85,6 @@ public class LimeLightSub extends SubsystemBase {
      SmartDashboard.putNumber("LimeLight Pose X", mt2.pose.getX());
      SmartDashboard.putNumber("LimeLight Pose Y", mt2.pose.getY());
      SmartDashboard.putNumber("LimeLight Pose Theta", mt2.pose.getRotation().getDegrees());
+    }
   }
 }
