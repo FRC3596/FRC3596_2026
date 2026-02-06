@@ -36,12 +36,13 @@ public class Constants {
         public static final int Shooter = 0;
     } 
     public class Manipulator{
-        // public static final double autoAgitatorSpeed = 0.5;
-        // public static final double autoIntakeSpeed = 0.5;
-        // public static final double autoShooterSpeed = 0.5;
+         public static final double autoAgitatorSpeed = 0.5;
+         public static final double autoIntakeSpeed = 0.5;
+         public static final double autoShooterSpeed = 0.5;
          public static final double shooterProportion = 0;
          public static final double shooterIntegral = 0;
         public static final double shooterDerivative = 0;
+        
        
 
 

@@ -8,7 +8,9 @@ import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 
@@ -17,16 +19,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class ShooterSub extends SubsystemBase {
-  private final SparkMax LShooter = new SparkMax(Constants.CANBus.LShooter, MotorType.kBrushless);
-  private final SparkMax RShooter = new SparkMax(Constants.CANBus.RShooter, MotorType.kBrushless);
-  private SparkBaseConfig LSConfig;
-  private final SparkClosedLoopController PIDLS = LShooter.getClosedLoopController();
-  private final SparkClosedLoopController PIDRS = RShooter.getClosedLoopController();
+  private final SparkMax shooter = new SparkMax(Constants.CANBus.RShooter, MotorType.kBrushless);
+  private SparkMaxConfig shooterConfig = new SparkMaxConfig();
+  private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
+  private final SparkClosedLoopController PID = shooter.getClosedLoopController();
 
   /** Creates a new ShooterSub. */
   public ShooterSub() {
-    LSConfig.follow(RShooter);
-    LShooter.configure(LSConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    shooterConfig.apply(PIDConfig);
+    shooter.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
+        Constants.Manipulator.shooterDerivative);
+
   }
 
   @Override
@@ -35,11 +39,12 @@ public class ShooterSub extends SubsystemBase {
   }
 
   public void runShooter(double speed) {
-    LShooter.set(speed);
+    shooter.set(speed);
   }
-  public void motorVeloSet(double speedRPM){
 
-    PIDLS.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
+  public void motorVeloSet(double speedRPM) {
+
+    PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
   }
 
 }

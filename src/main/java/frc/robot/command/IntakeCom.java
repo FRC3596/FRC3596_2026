@@ -16,7 +16,7 @@ public class IntakeCom extends Command {
   /** Creates a new ManualIntakeCom. */
   public IntakeCom(IntakeSub intakeSub) {
     m_intakeSub = intakeSub;
-    m_speed = Constants.ManipulatorSpeeds.autoIntakeSpeed;
+    m_speed = Constants.Manipulator.autoIntakeSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_intakeSub);
   }

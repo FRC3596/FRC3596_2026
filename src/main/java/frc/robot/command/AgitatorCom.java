@@ -15,7 +15,7 @@ public class AgitatorCom extends Command {
   /** Creates a new AgitatorCom. */
   public AgitatorCom(StorageSub storageSub) {
     m_storageSub = storageSub;
-    m_speed = Constants.ManipulatorSpeeds.autoAgitatorSpeed;
+    m_speed = Constants.Manipulator.autoAgitatorSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_storageSub);
   }

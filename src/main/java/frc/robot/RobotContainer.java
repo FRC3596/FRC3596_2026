@@ -21,9 +21,9 @@ public class RobotContainer {
   private final ShooterSub m_shooterSub = new ShooterSub();
   private final CommandXboxController m_driverController =
       new CommandXboxController(Constants.DriverStation.xboxControllerID);
-  private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.ManipulatorSpeeds.teleopAgitatorSpeed);
-  private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.ManipulatorSpeeds.teleopIntakeSpeed);
-  private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.ManipulatorSpeeds.teleopShooterSpeed);
+  private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.teleopAgitatorSpeed);
+  private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.teleopIntakeSpeed);
+  private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.Manipulator.teleopShooterSpeed);
   public RobotContainer() {
     configureBindings();
   }
