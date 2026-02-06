@@ -8,16 +8,16 @@ public class Constants {
         public static final int rightFlightStickID = 2;
     }
 
-    public class  CANBus {
-        // TODO Drive 1-10
-        public static final int FRAngle = 0;
-        public static final int FRDrive = 0;
-        public static final int FLAngle = 0;
-        public static final int FLDrive = 0;
-        public static final int BRAngle = 0;
-        public static final int BRDrive = 0;
-        public static final int BLAngle = 0;
-        public static final int BLDrive = 0;
+    public class CANBus {
+       
+        public static final int FRAngle = 4;
+        public static final int FRDrive = 3;
+        public static final int FLAngle = 2;
+        public static final int FLDrive = 1;
+        public static final int BRAngle = 8;
+        public static final int BRDrive = 7;
+        public static final int BLAngle = 6;
+        public static final int BLDrive = 5;
         // Intake 11-20
         public static final int LIntake = 11;
         public static final int RIntake = 12;

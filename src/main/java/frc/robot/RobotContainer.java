@@ -14,6 +14,11 @@ import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.Constants;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.XboxDrive;
+import frc.robot.subsystems.SwerveSub;
+import frc.robot.utils.Constants;
+
 
 public class RobotContainer {
   private final StorageSub m_storageSub = new StorageSub();
@@ -24,8 +29,15 @@ public class RobotContainer {
   private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.teleopAgitatorSpeed);
   private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.teleopIntakeSpeed);
   private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.Manipulator.teleopShooterSpeed);
+  
+
+ SwerveSub swerve = new SwerveSub();
+ CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
+XboxDrive teleopDriveCommand = new XboxDrive(swerve, xboxController);
+
   public RobotContainer() {
     configureBindings();
+    swerve.setDefaultCommand(teleopDriveCommand);
   }
 
   private void configureBindings() {
