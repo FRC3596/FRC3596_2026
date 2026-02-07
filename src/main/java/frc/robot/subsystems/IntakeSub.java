@@ -14,13 +14,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class IntakeSub extends SubsystemBase {
-  private final SparkMax LIntake = new SparkMax(Constants.CANBus.LIntake, MotorType.kBrushless);
-  private final SparkMax RIntake = new SparkMax(Constants.CANBus.RIntake, MotorType.kBrushless);
+  private final SparkMax Intake1 = new SparkMax(Constants.CANBus.LIntake, MotorType.kBrushless);
+  private final SparkMax Intake2 = new SparkMax(Constants.CANBus.RIntake, MotorType.kBrushless);
+  private final SparkMax Intake3 = new SparkMax(Constants.CANBus.RIntake, MotorType.kBrushless);
   private SparkBaseConfig LIConfig;
   /** Creates a new IntakeSub. */
   public IntakeSub() {
-    LIConfig.follow(RIntake);
-    LIntake.configure(LIConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    LIConfig.follow(Intake2);
+    Intake1.configure(LIConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
@@ -28,6 +29,6 @@ public class IntakeSub extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void runIntake(double speed){
-    LIntake.set(speed);
+    Intake1.set(speed);
   }
 }
