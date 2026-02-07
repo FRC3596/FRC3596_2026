@@ -41,6 +41,24 @@ public class Constants {
         public static final double RollOffset = 0.0;
         public static final double PitchOffset = 30.0;
         public static final double YawOffset = 0.0;
+    
+        public class VisionPID {
+            //Each index of these arrays corresponds to a specific tag ID
+            public static final double[] VisionHorizontalSetpoints = {-99, 0, 0, 0, 0, 0, 0, 0, 0, 0};  
+            public static final double[] VisionVerticalSetpoints = {-99, 0, 0, 0, 0, 0, 0, 0, 0, 0}; 
+            public static final double[] VisionRotationSetpoints = {-99, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+            public static final double LimelightHorizontal_P = 0.03;
+            public static final double LimelightVertical_P = 0.03;
+            public static final double LimelightRotation_P = 0.03;
+            public static final double LimelightHorizontal_I = 0.0;
+            public static final double LimelightVertical_I = 0.0;
+            public static final double LimelightRotation_I = 0.0;
+            public static final double LimelightHorizontal_D = 0.0;
+            public static final double LimelightVertical_D = 0.0;
+            public static final double LimelightRotation_D = 0.0;
+
+
+        }
     }
 }

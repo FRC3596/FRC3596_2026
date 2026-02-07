@@ -4,7 +4,11 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.spark.config.ClosedLoopConfig;
+import com.revrobotics.spark.config.ClosedLoopConfigAccessor;
+
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -18,6 +22,16 @@ import frc.robot.utils.LimelightHelpers.RawFiducial;
 public class LimeLightSub extends SubsystemBase {
   private SwerveSub m_swerveSub;
   boolean doRejectUpdate = false;
+  private PIDController VisionHorizontalPID = new PIDController(Constants.LimeLight.VisionPID.LimelightHorizontal_P,
+      Constants.LimeLight.VisionPID.LimelightHorizontal_I, Constants.LimeLight.VisionPID.LimelightHorizontal_D);
+  private PIDController VisionVerticalPID = new PIDController(Constants.LimeLight.VisionPID.LimelightVertical_P,
+      Constants.LimeLight.VisionPID.LimelightVertical_I, Constants.LimeLight.VisionPID.LimelightVertical_D);
+  private PIDController VisionRotationPID = new PIDController(Constants.LimeLight.VisionPID.LimelightRotation_P,
+      Constants.LimeLight.VisionPID.LimelightRotation_I, Constants.LimeLight.VisionPID.LimelightRotation_D);
+  private double VisionHorizontalPIDSpeed = 0; 
+  private double VisionVerticalPIDSpeed = 0;
+  private double VisionRotationPIDSpeed = 0; 
+  private double desiredPose = 0;
   
   /** Creates a new LimeLightSub. */
   public LimeLightSub(SwerveSub swerveSub) {
@@ -32,6 +46,8 @@ public class LimeLightSub extends SubsystemBase {
     );
 
     LimelightHelpers.setLEDMode_ForceOff("");
+    LimelightHelpers.SetFiducialIDFiltersOverride("", new int[]{1, 2, 3, 4}); // Only track these tag IDs
+    SmartDashboard.putNumber("limelight Despired pose", 0);
   }
 
   @Override
@@ -82,9 +98,55 @@ public class LimeLightSub extends SubsystemBase {
           mt2.pose,
           mt2.timestampSeconds);
      }
+
+    VisionHorizontalPIDSpeed = VisionHorizontalPID.calculate(mt2.pose.getX());
+     VisionVerticalPIDSpeed = VisionVerticalPID.calculate(mt2.pose.getY());
+     VisionRotationPIDSpeed = VisionRotationPID.calculate(mt2.pose.getRotation().getDegrees());
+
+
      SmartDashboard.putNumber("LimeLight Pose X", mt2.pose.getX());
      SmartDashboard.putNumber("LimeLight Pose Y", mt2.pose.getY());
      SmartDashboard.putNumber("LimeLight Pose Theta", mt2.pose.getRotation().getDegrees());
+     SmartDashboard.putNumber("Limelight Tag ID", (int) LimelightHelpers.getFiducialID(""));
+
     }
+    else {
+      // deafault if no target detected
+     desiredPose = SmartDashboard.getNumber("limelight Despired pose", 9);
+     SmartDashboard.putNumber("LimeLight Pose X", -99);
+     SmartDashboard.putNumber("LimeLight Pose Y", -99);
+     SmartDashboard.putNumber("LimeLight Pose Theta", -99);
+     SmartDashboard.putNumber("Limelight pose wanted", desiredPose);
+     VisionHorizontalPIDSpeed = 0;
+     VisionVerticalPIDSpeed = 0;
+     VisionRotationPIDSpeed = 0;
+    }
+  }
+  public void addVisionHorizontalSetpoint(double setpoint) {
+    VisionHorizontalPID.setSetpoint(setpoint);
+  }
+  public void addVisionVerticalSetpoint(double setpoint) {
+    VisionVerticalPID.setSetpoint(setpoint);
+  }
+  public void addVisionRotationSetpoint(double setpoint) {
+    VisionRotationPID.setSetpoint(setpoint);
+  }
+  public double CalculateVisionHorizontalPID(double setpoint) {
+    return VisionHorizontalPIDSpeed;
+  }
+  public double CalculateVisionVerticalPID(double setpoint) {
+    return VisionVerticalPIDSpeed;
+  }
+  public double CalculateVisionRotationPID(double setpoint) {
+    return VisionRotationPIDSpeed;
+  }
+  public boolean hasTarget() {
+    return LimelightHelpers.getTV("");
+  }
+  public boolean atSetPoint() {
+    return VisionHorizontalPID.atSetpoint() && VisionVerticalPID.atSetpoint() && VisionRotationPID.atSetpoint();
+  }
+  public int getTargetID() {
+    return (int) LimelightHelpers.getFiducialID("");
   }
 }
