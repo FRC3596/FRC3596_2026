@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.io.File;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -37,7 +37,9 @@ public class SwerveSub extends SubsystemBase {
   }
 public Rotation2d getYaw(){
 return m_swerve.getOdometryHeading();
-
+}
+public Pose2d getPose(){
+  return m_swerve.getPose();
 }
 
   @Override

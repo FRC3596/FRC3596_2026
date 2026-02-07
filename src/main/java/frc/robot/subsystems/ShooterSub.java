@@ -9,12 +9,9 @@ import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig;
-import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
-
-import edu.wpi.first.units.measure.Velocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
@@ -38,9 +35,6 @@ public class ShooterSub extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void runShooter(double speed) {
-    shooter.set(speed);
-  }
 
   public void motorVeloSet(double speedRPM) {
 

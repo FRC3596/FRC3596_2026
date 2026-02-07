@@ -12,6 +12,7 @@ import frc.robot.utils.Constants;
 public class IntakeCom extends Command {
   private final IntakeSub m_intakeSub;
   private final double m_speed;
+  
 //RyAn Wsa HerE
   /** Creates a new ManualIntakeCom. */
   public IntakeCom(IntakeSub intakeSub) {
