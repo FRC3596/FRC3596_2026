@@ -6,29 +6,52 @@ package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class IntakeSub extends SubsystemBase {
-  private final SparkMax Intake1 = new SparkMax(Constants.CANBus.LIntake, MotorType.kBrushless);
-  private final SparkMax Intake2 = new SparkMax(Constants.CANBus.RIntake, MotorType.kBrushless);
-  private final SparkMax Intake3 = new SparkMax(Constants.CANBus.RIntake, MotorType.kBrushless);
-  private SparkBaseConfig LIConfig;
+   
+
+ 
+
+
+  private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
+  private final SparkMax Roller2 = new SparkMax(Constants.CANBus.Intake2, MotorType.kBrushless);
+  private final SparkMax pivotIntake = new SparkMax(Constants.CANBus.Intake2, MotorType.kBrushless);
+  private SparkMaxConfig I1Config = new SparkMaxConfig();
+   private SparkMaxConfig pivotConfig = new SparkMaxConfig();
+  private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
+  private final SparkClosedLoopController PID = pivotIntake.getClosedLoopController();
+
   /** Creates a new IntakeSub. */
   public IntakeSub() {
-    LIConfig.follow(Intake2);
-    Intake1.configure(LIConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+
+pivotConfig.apply(PIDConfig);
+    pivotIntake.configure(pivotConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
+        Constants.Manipulator.shooterDerivative);
+
+
+    I1Config.follow(Roller2);
+    I1Config.inverted(true);
+    Roller1.configure(I1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+
+
   }
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
   public void runIntake(double speed){
-    Intake1.set(speed);
+    Roller1.set(speed);
   }
 }
