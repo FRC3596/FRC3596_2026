@@ -109,6 +109,12 @@ public class LimeLightSub extends SubsystemBase {
      SmartDashboard.putNumber("LimeLight Pose Theta", mt2.pose.getRotation().getDegrees());
      SmartDashboard.putNumber("Limelight Tag ID", (int) LimelightHelpers.getFiducialID(""));
 
+     if((mt2.pose.getX() <= 0 ) && (mt2.pose.getY() == 0) && (mt2.pose.getRotation().getDegrees() == 0)) {
+      SmartDashboard.putString("Ready to Shoot", "FIRE!!!!");
+     }
+     else {
+      SmartDashboard.putString("Ready to Shoot", "HOLD");
+     }
     }
     else {
       // deafault if no target detected
