@@ -48,9 +48,9 @@ public class IntakeSub extends SubsystemBase {
     Roller1.set(speed);
   }
 
-  public void motorVeloSet(double speedRPM) {
+  public void motorVeloSet(double PoseRotations) {
 
-    PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
+    PID.setSetpoint(PoseRotations, SparkBase.ControlType.kPosition);
   }
 
 }

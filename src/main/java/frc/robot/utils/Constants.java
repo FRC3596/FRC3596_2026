@@ -30,10 +30,8 @@ public class Constants {
         public static final int feeder = 31;
         public static final int shooter = 32;
         // Climb 41-50
-        public static final int L1Climb = 41;
-        public static final int L2Climb = 42;
-        public static final int R1Climb = 43;
-        public static final int R2Climb = 44;
+        public static final int climb1 = 41;
+        public static final int climb2 = 42;
         public static final int colorSensor = 45;
 
     }
@@ -52,6 +50,12 @@ public class Constants {
         public static final int pivotProportion = 0;
         public static final int pivotDerivative = 0;
         public static final int pivotIntegral = 0;
+         public static final int climberLProportion = 0;
+        public static final int climberLDerivative = 0;
+        public static final int climberLIntegral = 0;
+         public static final int climberRProportion = 0;
+        public static final int climberRDerivative = 0;
+        public static final int climberRIntegral = 0;
         public static final double teleopAgitatorSpeed = 0.7;
         public static final double teleopIntakeSpeed = 0.7;
         public static final double teleopShooterSpeed = 0.7;
@@ -63,6 +67,10 @@ public static final double redGoalY = 0;
 public static final double redGoalX = 0;
 public static final double blueGoalY = 0;
 public static final double blueGoalX = 0;
+public static final double redClimberY = 0;
+public static final double redClimberX = 0;
+public static final double blueClimberY = 0;
+public static final double blueClimberX = 0;
 
     }
 

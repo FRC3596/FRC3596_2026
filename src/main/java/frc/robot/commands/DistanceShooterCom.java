@@ -37,9 +37,11 @@ public class DistanceShooterCom extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //poseY and poseX represent robot's x and y coordinate positions relative to field
     double poseY = m_SwerveSub.getPose().getY();
     double poseX = m_SwerveSub.getPose().getX();
     Optional<DriverStation.Alliance> alliance = DriverStation.getAlliance();
+    //goalX and goalY represent goal's x and y coordinate positions relative to the field
     double goalX = 0;
     double goalY = 0;
     if (alliance.isPresent()) {
@@ -56,7 +58,7 @@ public class DistanceShooterCom extends Command {
 
       }
     }
-    double robotGoalDist = Math.pow(((Math.pow(goalX - poseX, 2)))+(Math.pow(goalY-poseY,2)), 1/2);
+    double robotToGoalDist = Math.pow(((Math.pow((goalX - poseX), 2)))+(Math.pow((goalY-poseY),2)), 1/2);
     // TODO turn robotGoalDist to RPM using kinematics which then do PID
 
   }
