@@ -31,18 +31,22 @@ public class IntakeCom extends Command {
   @Override
   public void initialize() {
     m_intakeSub.runIntake(0);
+    m_intakeSub.motorPoseSet(Constants.Manipulator.intakeDownRotations);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_intakeSub.runIntake(m_speed);
+
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_intakeSub.runIntake(0);
+      m_intakeSub.motorPoseSet(Constants.Manipulator.intakeUpRotations);
   }
   // Returns true when the command should end.
   @Override

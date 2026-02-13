@@ -23,7 +23,7 @@ public class IntakeSub extends SubsystemBase {
   private SparkMaxConfig I1Config = new SparkMaxConfig();
   private SparkMaxConfig pivotConfig = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
-  private final SparkClosedLoopController PID = pivotIntake.getClosedLoopController();
+  private final SparkClosedLoopController pivotPID = pivotIntake.getClosedLoopController();
 
   /** Creates a new IntakeSub. */
   public IntakeSub() {
@@ -45,12 +45,12 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double speed) {
-    Roller1.set(speed);
+    Roller2.set(speed);
   }
 
-  public void motorVeloSet(double PoseRotations) {
+  public void motorPoseSet(double PoseRotations) {
 
-    PID.setSetpoint(PoseRotations, SparkBase.ControlType.kPosition);
+    pivotPID.setSetpoint(PoseRotations, SparkBase.ControlType.kPosition);
   }
 
 }

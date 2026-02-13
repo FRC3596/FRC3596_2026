@@ -59,6 +59,8 @@ public class Constants {
         public static final double teleopAgitatorSpeed = 0.7;
         public static final double teleopIntakeSpeed = 0.7;
         public static final double teleopShooterSpeed = 0.7;
+        public static final double intakeUpRotations = 0;
+         public static final double intakeDownRotations = 0;
     
     }
     public class FieldConstants {
