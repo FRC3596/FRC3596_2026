@@ -18,24 +18,24 @@ import frc.robot.utils.Constants;
 
 public class IntakeSub extends SubsystemBase {
   private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
-  private final SparkMax Roller2 = new SparkMax(Constants.CANBus.Intake2, MotorType.kBrushless);
-  private final SparkMax pivotIntake = new SparkMax(Constants.CANBus.pivotIntake, MotorType.kBrushless);
+  private final SparkMax pivotIntake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
+  private final SparkMax pivotIntake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
   private SparkMaxConfig I1Config = new SparkMaxConfig();
   private SparkMaxConfig pivotConfig = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
-  private final SparkClosedLoopController pivotPID = pivotIntake.getClosedLoopController();
+  private final SparkClosedLoopController pivotPID = pivotIntake1.getClosedLoopController();
 
   /** Creates a new IntakeSub. */
   public IntakeSub() {
 
     pivotConfig.apply(PIDConfig);
-    pivotIntake.configure(pivotConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    pivotIntake1.configure(pivotConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
         Constants.Manipulator.pivotDerivative);
 
-    I1Config.follow(Roller2);
-    I1Config.inverted(true);
-    Roller1.configure(I1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    I1Config.follow(pivotIntake1, true);
+
+    pivotIntake2.configure(I1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
   }
 
@@ -45,7 +45,7 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double speed) {
-    Roller2.set(speed);
+    Roller1.set(speed);
   }
 
   public void motorPoseSet(double PoseRotations) {

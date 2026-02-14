@@ -20,8 +20,8 @@ public class Constants {
         public static final int BLDrive = 5;
         // Intake 11-20
         public static final int Intake1 = 11;
-        public static final int Intake2 = 12;
-        public static final int pivotIntake = 13;
+        public static final int pivotIntake1 = 12;
+        public static final int pivotIntake2 = 13;
 
         // Agitators 21-30
         public static final int agitator = 21;
