@@ -20,23 +20,21 @@ public class IntakeSub extends SubsystemBase {
   private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
   private final SparkMax pivotIntake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
   private final SparkMax pivotIntake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
-  private SparkMaxConfig I1Config = new SparkMaxConfig();
-  private SparkMaxConfig pivotConfig = new SparkMaxConfig();
+  private SparkMaxConfig p2Config = new SparkMaxConfig();
+  private SparkMaxConfig p1Config = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
   private final SparkClosedLoopController pivotPID = pivotIntake1.getClosedLoopController();
 
   /** Creates a new IntakeSub. */
   public IntakeSub() {
 
-    pivotConfig.apply(PIDConfig);
-    pivotIntake1.configure(pivotConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
         Constants.Manipulator.pivotDerivative);
+    p1Config.apply(PIDConfig);
+    p2Config.follow(pivotIntake1, true);
 
-    I1Config.follow(pivotIntake1, true);
-
-    pivotIntake2.configure(I1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-
+    pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    pivotIntake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override

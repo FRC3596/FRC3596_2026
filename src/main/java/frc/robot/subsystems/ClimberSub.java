@@ -26,14 +26,15 @@ public class ClimberSub extends SubsystemBase {
 
   /** Creates a new ClimberSub. */
   public ClimberSub() {
+    PIDConfig.pid(Constants.Manipulator.climberLProportion, Constants.Manipulator.climberLIntegral,
+      Constants.Manipulator.climberLDerivative);
     climberLConfig.apply(PIDConfig);
     climberL.configure(climberLConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-    PIDConfig.pid(Constants.Manipulator.climberLProportion, Constants.Manipulator.climberLIntegral,
-        Constants.Manipulator.climberLDerivative);
+    
+    PIDConfig.pid(Constants.Manipulator.climberRProportion, Constants.Manipulator.climberRIntegral,
+      Constants.Manipulator.climberRDerivative);
     climberRConfig.apply(PIDConfig);
     climberR.configure(climberRConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-    PIDConfig.pid(Constants.Manipulator.climberRProportion, Constants.Manipulator.climberRIntegral,
-        Constants.Manipulator.climberRDerivative);
   }
 
   @Override
