@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
@@ -24,9 +25,10 @@ public class ShooterSub extends SubsystemBase {
 
   /** Creates a new ShooterSub. */
   public ShooterSub() {
-
+    
     PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative);
+    shooterConfig.idleMode(IdleMode.kCoast);
     shooterConfig.apply(PIDConfig);
     shooter.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
