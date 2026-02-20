@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -22,10 +23,11 @@ public class ShooterSub extends SubsystemBase {
   private SparkMaxConfig shooterConfig = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
   private final SparkClosedLoopController PID = shooter.getClosedLoopController();
+  private final RelativeEncoder encoder = shooter.getEncoder();
 
   /** Creates a new ShooterSub. */
   public ShooterSub() {
-    
+
     PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative);
     shooterConfig.idleMode(IdleMode.kCoast);
@@ -37,11 +39,24 @@ public class ShooterSub extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+    public void idleSpeed() {
+  idleSpeed(Constants.Manipulator.idleSpeed);
+  }
 
+
+  public void idleSpeed(double idleSpeed) {
+    if ((encoder.getVelocity() > idleSpeed)) {
+      shooter.set(0);
+    } else {
+      PID.setSetpoint(idleSpeed, SparkBase.ControlType.kVelocity);
+
+    }
+  }
 
   public void motorVeloSet(double speedRPM) {
 
     PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
+
   }
 
 }
