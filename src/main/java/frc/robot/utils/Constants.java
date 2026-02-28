@@ -32,7 +32,6 @@ public class Constants {
         // Climb 41-50
         public static final int climb1 = 41;
         public static final int climb2 = 42;
-        public static final int colorSensor = 45;
 
     }
 
