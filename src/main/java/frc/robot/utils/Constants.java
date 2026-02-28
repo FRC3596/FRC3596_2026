@@ -47,38 +47,38 @@ public class Constants {
         public static final double feederProportion = 0;
         public static final double feederIntegral = 0;
         public static final double feederDerivative = 0;
-        public static final int pivotProportion = 0;
-        public static final int pivotDerivative = 0;
-        public static final int pivotIntegral = 0;
-         public static final int climberLProportion = 0;
-        public static final int climberLDerivative = 0;
-        public static final int climberLIntegral = 0;
-         public static final int climberRProportion = 0;
-        public static final int climberRDerivative = 0;
-        public static final int climberRIntegral = 0;
+        public static final double pivotProportion = 0;
+        public static final double pivotDerivative = 0;
+        public static final double pivotIntegral = 0;
+        public static final double climberLProportion = 0;
+        public static final double climberLDerivative = 0;
+        public static final double climberLIntegral = 0;
+        public static final double climberRProportion = 0;
+        public static final double climberRDerivative = 0;
+        public static final double climberRIntegral = 0;
         public static final double teleopAgitatorSpeed = 0.7;
         public static final double teleopIntakeSpeed = 0.7;
         public static final double teleopShooterSpeed = 0.7;
         public static final double intakeUpRotations = 0;
-         public static final double intakeDownRotations = 0;
-         public static final double idleSpeed = 0;
-         public static final double FeederSpeed = 0;
+        public static final double intakeDownRotations = 0;
+        public static final double idleSpeed = 0;
+        public static final double FeederSpeed = 0;
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
-    
+
     }
+
     public class FieldConstants {
 
-public static final double redGoalY = 0;
-public static final double redGoalX = 0;
-public static final double blueGoalY = 0;
-public static final double blueGoalX = 0;
-public static final double redClimberY = 0;
-public static final double redClimberX = 0;
-public static final double blueClimberY = 0;
-public static final double blueClimberX = 0;
+        public static final double redGoalY = 0;
+        public static final double redGoalX = 0;
+        public static final double blueGoalY = 0;
+        public static final double blueGoalX = 0;
+        public static final double redClimberY = 0;
+        public static final double redClimberX = 0;
+        public static final double blueClimberY = 0;
+        public static final double blueClimberX = 0;
 
     }
 
-    
 }
