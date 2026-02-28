@@ -19,20 +19,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class ShooterSub extends SubsystemBase {
-  private final SparkMax shooter = new SparkMax(Constants.CANBus.shooter, MotorType.kBrushless);
+  private final SparkMax motor = new SparkMax(Constants.CANBus.shooter, MotorType.kBrushless);
   private SparkMaxConfig shooterConfig = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
-  private final SparkClosedLoopController PID = shooter.getClosedLoopController();
-  private final RelativeEncoder encoder = shooter.getEncoder();
+  private final SparkClosedLoopController PID = motor.getClosedLoopController();
+  private final RelativeEncoder encoder = motor.getEncoder();
 
   /** Creates a new ShooterSub. */
   public ShooterSub() {
 
     PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
-        Constants.Manipulator.shooterDerivative);
+        Constants.Manipulator.shooterDerivative).outputRange(0, 1);
     shooterConfig.idleMode(IdleMode.kCoast);
     shooterConfig.apply(PIDConfig);
-    shooter.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    
+    motor.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
@@ -46,7 +47,7 @@ public class ShooterSub extends SubsystemBase {
 
   public void customIdleSpeed(double customIdleSpeed) {
     if ((encoder.getVelocity() > customIdleSpeed)) {
-      shooter.set(0);
+      motor.set(0);
     } else {
       PID.setSetpoint(customIdleSpeed, SparkBase.ControlType.kVelocity);
 
@@ -55,7 +56,7 @@ public class ShooterSub extends SubsystemBase {
 
   public void motorVeloSet(double speedRPM) {
 
-    PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
+    PID.setSetpoint(1000, SparkBase.ControlType.kVelocity);
 
   }
 

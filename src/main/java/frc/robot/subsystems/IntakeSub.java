@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.PersistMode;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -13,6 +14,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
@@ -23,23 +25,27 @@ public class IntakeSub extends SubsystemBase {
   private SparkMaxConfig p2Config = new SparkMaxConfig();
   private SparkMaxConfig p1Config = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
+  private final RelativeEncoder p1encoder = pivotIntake1.getEncoder();
   private final SparkClosedLoopController pivotPID = pivotIntake1.getClosedLoopController();
 
   /** Creates a new IntakeSub. */
   public IntakeSub() {
 
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
-        Constants.Manipulator.pivotDerivative);
+        Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
     p1Config.apply(PIDConfig);
-    p2Config.follow(pivotIntake1, true);
-
+    p1Config.smartCurrentLimit(20);
+    p1Config.inverted(true);
     pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    
+    p2Config.follow(pivotIntake1, true);
     pivotIntake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
   }
 
   public void runIntake(double speed) {

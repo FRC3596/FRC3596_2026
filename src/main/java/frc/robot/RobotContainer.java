@@ -30,7 +30,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(
       Constants.DriverStation.xboxControllerID);
   private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.teleopAgitatorSpeed);
-  private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.teleopIntakeSpeed);
+  private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeRollerSpeed);
   private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.Manipulator.teleopShooterSpeed);
   private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
   private final ClimberSub m_ClimberSub = new ClimberSub();
@@ -38,23 +38,24 @@ public class RobotContainer {
   SwerveSub swerve = new SwerveSub();
   CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   XboxDriveCom teleopDriveCommand = new XboxDriveCom(swerve, xboxController);
-  ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);
+  // ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);
 
   public RobotContainer() {
     configureBindings();
-    swerve.setDefaultCommand(teleopDriveCommand);
-    m_shooterSub.setDefaultCommand(Idle);
+
+    // swerve.setDefaultCommand(teleopDriveCommand);
+    // m_shooterSub.setDefaultCommand(Idle);
   }
 
   private void configureBindings() {
     m_driverController.a().whileTrue(m_intakeCom);
     m_driverController.b().whileTrue(m_shooterCom);
-    m_driverController.y().whileTrue(m_agitatorCom);
-    m_driverController.rightTrigger().whileTrue(m_FeederCom);
-    m_driverController.povUp()
-        .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
-    m_driverController.povDown()
-        .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
+    // m_driverController.y().whileTrue(m_agitatorCom);
+    // m_driverController.rightTrigger().whileTrue(m_FeederCom);
+    // m_driverController.povUp()
+    //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
+    // m_driverController.povDown()
+    //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
   }
 
   public Command getAutonomousCommand() {
