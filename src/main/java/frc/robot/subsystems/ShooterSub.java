@@ -39,16 +39,16 @@ public class ShooterSub extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-    public void idleSpeed() {
-  idleSpeed(Constants.Manipulator.idleSpeed);
+    public void defaultIdleSpeed() {
+  customIdleSpeed(Constants.Manipulator.idleSpeed);
   }
 
 
-  public void idleSpeed(double idleSpeed) {
-    if ((encoder.getVelocity() > idleSpeed)) {
+  public void customIdleSpeed(double customIdleSpeed) {
+    if ((encoder.getVelocity() > customIdleSpeed)) {
       shooter.set(0);
     } else {
-      PID.setSetpoint(idleSpeed, SparkBase.ControlType.kVelocity);
+      PID.setSetpoint(customIdleSpeed, SparkBase.ControlType.kVelocity);
 
     }
   }

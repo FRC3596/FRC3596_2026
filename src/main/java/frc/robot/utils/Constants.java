@@ -62,6 +62,9 @@ public class Constants {
         public static final double intakeUpRotations = 0;
          public static final double intakeDownRotations = 0;
          public static final double idleSpeed = 0;
+         public static final double FeederSpeed = 0;
+        public static final double climberRotationsUp = 0;
+        public static final double climberRotationsDown = 0;
     
     }
     public class FieldConstants {

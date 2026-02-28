@@ -9,43 +9,40 @@ import frc.robot.subsystems.ShooterSub;
 import frc.robot.utils.Constants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ShooterCom extends Command {
+public class ShooterIdleCom extends Command {
 
   private final ShooterSub m_shooterSub;
-  private final double m_speed;
+  private final double m_idleSpeed;
 
-  /** Creates a new ShooterCom. */
-  public ShooterCom(ShooterSub shooterSub) {
+  /** Creates a new ShooterIdleCom. */
+  public ShooterIdleCom(ShooterSub shooterSub) {
     m_shooterSub = shooterSub;
-    m_speed = Constants.Manipulator.autoShooterSpeed;
+    m_idleSpeed = Constants.Manipulator.idleSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSub);
+    addRequirements(shooterSub);// Use addRequirements() here to declare subsystem dependencies.
   }
-
-  public ShooterCom(ShooterSub shooterSub, double speed) {
+   public ShooterIdleCom(ShooterSub shooterSub, double idleSpeed) {
     m_shooterSub = shooterSub;
-    m_speed = speed;
+    m_idleSpeed = idleSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSub);
+    addRequirements(shooterSub);// Use addRequirements() here to declare subsystem dependencies.
   }
+  
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooterSub.motorVeloSet(m_speed);
-
+    m_shooterSub.customIdleSpeed(m_idleSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.
