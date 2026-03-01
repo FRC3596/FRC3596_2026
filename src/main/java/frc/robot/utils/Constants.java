@@ -48,7 +48,7 @@ public class Constants {
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
         public static final double intakeDownRotations = 5 * 1/6; //gear ratio * output rotations
-        public static final double pivotProportion = intakeDownRotations * 0.20; //go to xx% speed at full error
+        public static final double pivotProportion = intakeDownRotations * 0.05; //go to xx% speed at full error
         public static final double pivotDerivative = 0;
         public static final double pivotIntegral = 0;
         public static final double climberLProportion = 0;
