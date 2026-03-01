@@ -40,7 +40,7 @@ public class Constants {
         public static final double autoAgitatorSpeed = 0.5;
         public static final double autoIntakeSpeed = 0.5;
         public static final double autoShooterSpeed = 1000;
-        public static final double shooterProportion = 0.05;
+        public static final double shooterProportion = 0.00333;
         public static final double shooterIntegral = 0;
         public static final double shooterDerivative = 0;
         public static final double feederProportion = 0;
@@ -48,7 +48,7 @@ public class Constants {
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
         public static final double intakeDownRotations = 5 * 1/6; //gear ratio * output rotations
-        public static final double pivotProportion = 0.3;//intakeDownRotations * 0.20; //go to xx% speed at full error
+        public static final double pivotProportion = intakeDownRotations * 0.20; //go to xx% speed at full error
         public static final double pivotDerivative = 0;
         public static final double pivotIntegral = 0;
         public static final double climberLProportion = 0;
@@ -59,7 +59,7 @@ public class Constants {
         public static final double climberRIntegral = 0;
         public static final double teleopAgitatorSpeed = 0.7;
         public static final double intakeRollerSpeed = 1;
-        public static final double teleopShooterSpeed = 0.7;
+        public static final double teleopShooterSpeed = 1000;
 
         public static final double idleSpeed = 0;
         public static final double FeederSpeed = 0;
