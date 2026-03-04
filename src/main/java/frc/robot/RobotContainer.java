@@ -14,24 +14,29 @@ import frc.robot.utils.Constants;
 import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
 
- SwerveSub swerve = new SwerveSub();
- CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
-XboxDrive teleopDriveCommand = new XboxDrive(swerve, xboxController);
+  SwerveSub swerve = new SwerveSub();
+  CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
+  XboxDrive teleopDriveCommand = new XboxDrive(swerve, xboxController);
 
   public RobotContainer() {
+
     configureBindings();
     swerve.setDefaultCommand(teleopDriveCommand);
 
     autoChooser = AutoBuilder.buildAutoChooser();
+
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+  }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    return autoChooser.getSelected();
   }
 }
