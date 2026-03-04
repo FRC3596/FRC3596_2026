@@ -35,7 +35,6 @@ public class IntakeSub extends SubsystemBase {
         Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
     p1Config.apply(PIDConfig);
     p1Config.smartCurrentLimit(20);
-    p1Config.inverted(true);
     pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
     
     p2Config.follow(pivotIntake1, true);

@@ -31,7 +31,6 @@ public class ShooterSub extends SubsystemBase {
     PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative).outputRange(0, 1);
     shooterConfig.idleMode(IdleMode.kCoast);
-    shooterConfig.inverted(true);
     shooterConfig.apply(PIDConfig);
     
     motor.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
@@ -57,7 +56,7 @@ public class ShooterSub extends SubsystemBase {
 
   public void motorVeloSet(double speedRPM) {
 
-    PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
+    PID.setSetpoint(1000, SparkBase.ControlType.kVelocity);
 
   }
 
