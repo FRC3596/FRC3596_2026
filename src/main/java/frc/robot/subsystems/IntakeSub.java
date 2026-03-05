@@ -49,7 +49,13 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double speed) {
+   if (p1encoder.getPosition() > Math.abs(Constants.Manipulator.intakeDownRotations/2))
+   { 
     Roller1.set(speed);
+  }
+  else {
+    Roller1.set(0);
+  }
   }
 
   public void motorPoseSet(double PoseRotations) {
