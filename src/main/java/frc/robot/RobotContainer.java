@@ -53,7 +53,7 @@ public class RobotContainer {
     m_driverController.b().whileTrue(m_shooterComFar);
     m_driverController.leftBumper().whileTrue(m_shooterComClose);
     m_driverController.y().whileTrue(m_agitatorCom);
-    m_driverController.rightTrigger().whileTrue(m_FeederCom);
+   // m_driverController.rightTrigger().whileTrue(m_FeederCom);
     // m_driverController.povUp()
     //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()
