@@ -45,6 +45,7 @@ public class IntakeSub extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
+    SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
   }
 
   public void runIntake(double speed) {

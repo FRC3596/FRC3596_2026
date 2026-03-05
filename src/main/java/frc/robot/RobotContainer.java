@@ -29,7 +29,7 @@ public class RobotContainer {
   private final FeederSub m_FeederSub = new FeederSub();
   private final CommandXboxController m_driverController = new CommandXboxController(
       Constants.DriverStation.xboxControllerID);
-  private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.teleopAgitatorSpeed);
+  private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.autoAgitatorSpeed);
   private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeRollerSpeed);
   private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.Manipulator.teleopShooterSpeed);
   private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
@@ -50,8 +50,8 @@ public class RobotContainer {
   private void configureBindings() {
     m_driverController.a().whileTrue(m_intakeCom);
     m_driverController.b().whileTrue(m_shooterCom);
-    // m_driverController.y().whileTrue(m_agitatorCom);
-    // m_driverController.rightTrigger().whileTrue(m_FeederCom);
+    m_driverController.y().whileTrue(m_agitatorCom);
+    m_driverController.rightTrigger().whileTrue(m_FeederCom);
     // m_driverController.povUp()
     //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()

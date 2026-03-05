@@ -15,6 +15,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
@@ -38,6 +39,8 @@ public class ShooterSub extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Motor Velocity", encoder.getVelocity());
+    SmartDashboard.putNumber("Motor Target", PID.getMAXMotionSetpointVelocity());
     // This method will be called once per scheduler run
   }
     public void defaultIdleSpeed() {
@@ -56,7 +59,7 @@ public class ShooterSub extends SubsystemBase {
 
   public void motorVeloSet(double speedRPM) {
 
-    PID.setSetpoint(1000, SparkBase.ControlType.kVelocity);
+    PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
 
   }
 

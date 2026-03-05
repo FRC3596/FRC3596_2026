@@ -37,7 +37,7 @@ public class Constants {
 
     public class Manipulator {
 
-        public static final double autoAgitatorSpeed = 0.5;
+        public static final double autoAgitatorSpeed = -.3;
         public static final double autoIntakeSpeed = 0.5;
         public static final double autoShooterSpeed = 1000;
         public static final double shooterProportion = 0.001;
@@ -57,9 +57,8 @@ public class Constants {
         public static final double climberRProportion = 0;
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
-        public static final double teleopAgitatorSpeed = 0.7;
         public static final double intakeRollerSpeed = 1;
-        public static final double teleopShooterSpeed = 300;
+        public static final double teleopShooterSpeed = 2000;
 
         public static final double idleSpeed = 0;
         public static final double FeederSpeed = 0;
