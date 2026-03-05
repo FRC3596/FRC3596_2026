@@ -31,7 +31,8 @@ public class RobotContainer {
       Constants.DriverStation.xboxControllerID);
   private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.autoAgitatorSpeed);
   private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeRollerSpeed);
-  private final ShooterCom m_shooterCom = new ShooterCom(m_shooterSub, Constants.Manipulator.teleopShooterSpeed);
+  private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
+   private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.ShortShooterSpeed);
   private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
   private final ClimberSub m_ClimberSub = new ClimberSub();
 
@@ -49,7 +50,8 @@ public class RobotContainer {
 
   private void configureBindings() {
     m_driverController.a().whileTrue(m_intakeCom);
-    m_driverController.b().whileTrue(m_shooterCom);
+    m_driverController.b().whileTrue(m_shooterComFar);
+    m_driverController.leftBumper().whileTrue(m_shooterComClose);
     m_driverController.y().whileTrue(m_agitatorCom);
     m_driverController.rightTrigger().whileTrue(m_FeederCom);
     // m_driverController.povUp()

@@ -58,7 +58,8 @@ public class Constants {
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
         public static final double intakeRollerSpeed = 1;
-        public static final double teleopShooterSpeed = 2000;
+        public static final double LongShooterSpeed = 5500;
+        public static final double ShortShooterSpeed = 3500;
 
         public static final double idleSpeed = 0;
         public static final double FeederSpeed = 0;
