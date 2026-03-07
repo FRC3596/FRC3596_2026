@@ -35,7 +35,7 @@ addRequirements(m_swerve);
   // XBox controller controls swerve modules
   @Override
   public void execute() {
-    m_swerve.control(m_leftJoystick.getX(),-m_leftJoystick.getY(), m_rightJoystick.getX());
+    m_swerve.control(m_leftJoystick.getX(), m_leftJoystick.getY(), m_rightJoystick.getX());
   }
 
   // Called once the command ends or is interrupted.
