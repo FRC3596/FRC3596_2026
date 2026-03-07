@@ -37,7 +37,7 @@ public class IntakeSub extends SubsystemBase {
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
         Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
     p1Config.apply(PIDConfig);
-    p1Config.smartCurrentLimit(20);
+    p1Config.smartCurrentLimit(10);
     pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
     
     p2Config.follow(pivotIntake1, true);
@@ -57,9 +57,11 @@ public class IntakeSub extends SubsystemBase {
    if (Math.abs(p1encoder.getPosition()) > Math.abs(Constants.Manipulator.intakeDownRotations/2))
    { 
     Roller1.set(speed);
+    SmartDashboard.putBoolean("Rollers Active", true);
   }
   else {
     Roller1.set(0);
+    SmartDashboard.putBoolean("Rollers Active", false);
   }
   }
 

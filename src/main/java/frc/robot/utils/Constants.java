@@ -9,7 +9,7 @@ public class Constants {
     }
 
     public class CANBus {
-       
+
         public static final int FRAngle = 4;
         public static final int FRDrive = 3;
         public static final int FLAngle = 2;
@@ -47,8 +47,8 @@ public class Constants {
         public static final double feederIntegral = 0;
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
-        public static final double intakeDownRotations = -1.190476894378662; //gear ratio * output rotations
-        public static final double pivotProportion = 0.5; //go to xx% speed at full error
+        public static final double intakeDownRotations = -1.190476894378662 * 4; //gear ratio * output rotations
+        public static final double pivotProportion = 1; //go to xx% speed at full error
         public static final double pivotDerivative = 0;
         public static final double pivotIntegral = 0;
         public static final double climberLProportion = 0;

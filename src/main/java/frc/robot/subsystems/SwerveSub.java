@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.estimator.PoseEstimator;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.io.File;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -86,9 +88,13 @@ public class SwerveSub extends SubsystemBase {
   }
 public Rotation2d getYaw(){
 return m_swerve.getOdometryHeading();
-
 }
-
+public Pose2d getPose(){
+  return m_swerve.getPose();
+}
+public void resetPose() {
+  m_swerve.resetOdometry(getPose());
+}
   @Override
   public void periodic() {
 
