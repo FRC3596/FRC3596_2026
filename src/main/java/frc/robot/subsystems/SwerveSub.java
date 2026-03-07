@@ -27,7 +27,7 @@ public class SwerveSub extends SubsystemBase {
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
-    final double maximumSpeed = Units.feetToMeters(4.5);
+    final double maximumSpeed = Units.feetToMeters(15.724);
     File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
       // loki wSA hare 1/17/26
