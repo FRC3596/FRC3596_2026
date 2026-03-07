@@ -95,7 +95,7 @@ public Pose2d getPose(){
   return m_swerve.getPose();
 }
 public void resetPose() {
-  m_swerve.resetOdometry(getPose());
+  m_swerve.zeroGyro();
 }
   @Override
   public void periodic() {

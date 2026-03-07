@@ -80,7 +80,7 @@ public class RobotContainer {
     m_driverController.rightBumper().whileTrue(m_shooterSlow);
     m_driverController.y().whileTrue(m_agitatorCom);
    // m_driverController.rightTrigger().whileTrue(m_FeederCom);
-    //m_LeftJoystick.button(0).onTrue(new InstantCommand(() -> swerve.resetOdometry()));
+    m_RightJoystick.button(2).onTrue(new InstantCommand(swerve::resetPose));
     //  m_driverController.povUp()
     //      .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()

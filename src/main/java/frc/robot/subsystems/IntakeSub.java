@@ -27,13 +27,12 @@ public class IntakeSub extends SubsystemBase {
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
   private final RelativeEncoder p1encoder = pivotIntake1.getEncoder();
   private final SparkClosedLoopController pivotPID = pivotIntake1.getClosedLoopController();
-  private double kCosValue = 0;
+  private double kCosValue = 2;
 
   /** Creates a new IntakeSub. */
   public IntakeSub() {
     //PIDConfig.feedForward.kCosRatio(0);
     kCosValue = SmartDashboard.getNumber("kCos Value", 0);
-    PIDConfig.feedForward.kCos(kCosValue);
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
         Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
     p1Config.apply(PIDConfig);
