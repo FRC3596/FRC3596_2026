@@ -32,7 +32,7 @@ public class IntakeSub extends SubsystemBase {
   /** Creates a new IntakeSub. */
   public IntakeSub() {
     //PIDConfig.feedForward.kCosRatio(0);
-    kCosValue = SmartDashboard.getNumber(" kCos Value", 0);
+    kCosValue = SmartDashboard.getNumber("kCos Value", 0);
     PIDConfig.feedForward.kCos(kCosValue);
     PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
         Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
@@ -46,13 +46,15 @@ public class IntakeSub extends SubsystemBase {
 
   @Override
   public void periodic() {
+    kCosValue = SmartDashboard.getNumber("kCos Value", 0);
+    PIDConfig.feedForward.kCos(kCosValue);
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
-    SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
+    SmartDashboard.putNumber("PID out", pivotIntake1.getAppliedOutput());
   }
 
   public void runIntake(double speed) {
-   if (p1encoder.getPosition() > Math.abs(Constants.Manipulator.intakeDownRotations/2))
+   if (Math.abs(p1encoder.getPosition()) > Math.abs(Constants.Manipulator.intakeDownRotations/2))
    { 
     Roller1.set(speed);
   }

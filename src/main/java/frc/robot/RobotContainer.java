@@ -18,6 +18,7 @@ import frc.robot.commands.AgitatorCom;
 //import frc.robot.commands.FeederCom;
 import frc.robot.commands.IntakeCom;
 import frc.robot.commands.ShooterCom;
+import frc.robot.commands.ShooterIdleCom;
 //import frc.robot.commands.ShooterIdleCom;
 import frc.robot.commands.XboxDriveCom;
 import frc.robot.subsystems.SwerveSub;
@@ -33,19 +34,19 @@ public class RobotContainer {
   private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeRollerSpeed);
   private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
    private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.ShortShooterSpeed);
-  //private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
+   private final ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);;  //private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
   //private final ClimberSub m_ClimberSub = new ClimberSub();
 
   SwerveSub swerve = new SwerveSub();
   CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   XboxDriveCom teleopDriveCommand = new XboxDriveCom(swerve, xboxController);
-  // ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);
+
 
   public RobotContainer() {
     configureBindings();
 
     // swerve.setDefaultCommand(teleopDriveCommand);
-     //m_shooterSub.setDefaultCommand(Idle);
+   // m_shooterSub.setDefaultCommand(Idle);
   }
 
   private void configureBindings() {
