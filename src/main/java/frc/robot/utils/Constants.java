@@ -1,11 +1,14 @@
 package frc.robot.utils;
 
+import edu.wpi.first.math.util.Units;
+
 public class Constants {
 
     public class DriverStation {
         public static final int xboxControllerID = 0;
         public static final int leftFlightStickID = 1;
         public static final int rightFlightStickID = 2;
+        public static final double DriveSpeedMultiplier = Units.feetToMeters(15.724);;
     }
 
     public class CANBus {
@@ -48,9 +51,9 @@ public class Constants {
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
         public static final double intakeDownRotations = -1.190476894378662 * 4; //gear ratio * output rotations
-        public static final double pivotProportion = 1; //go to xx% speed at full error
+        public static final double pivotProportion = 2; //go to xx% speed at full error
         public static final double pivotDerivative = 0;
-        public static final double pivotIntegral = 0;
+        public static final double pivotIntegral = 0.5;
         public static final double climberLProportion = 0;
         public static final double climberLDerivative = 0;
         public static final double climberLIntegral = 0;

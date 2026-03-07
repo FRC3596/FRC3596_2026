@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utils.Constants;
+
 import java.io.File;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
@@ -27,7 +29,7 @@ public class SwerveSub extends SubsystemBase {
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
-    final double maximumSpeed = Units.feetToMeters(15.724);
+    final double maximumSpeed = Constants.DriverStation.DriveSpeedMultiplier;
     File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
       // loki wSA hare 1/17/26

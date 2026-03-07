@@ -41,8 +41,11 @@ public class IntakeSub extends SubsystemBase {
     pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
     
     p2Config.follow(pivotIntake1, true);
+    p2Config.smartCurrentLimit(10);
+  //  p2Config.apply(PIDConfig);
     pivotIntake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
+
 
   @Override
   public void periodic() {
@@ -50,6 +53,7 @@ public class IntakeSub extends SubsystemBase {
     PIDConfig.feedForward.kCos(kCosValue);
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
+    SmartDashboard.putNumber("Pivot setpoint", pivotPID.getSetpoint());
     SmartDashboard.putNumber("PID out", pivotIntake1.getAppliedOutput());
   }
 
