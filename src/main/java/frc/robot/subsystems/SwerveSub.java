@@ -85,7 +85,7 @@ public class SwerveSub extends SubsystemBase {
   public void control(double xVelo, double yVelo, double rotVelo) {
 
     ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo);
-    m_swerve.drive(velocity);
+    m_swerve.driveFieldOriented(velocity);
 
   }
 public Rotation2d getYaw(){

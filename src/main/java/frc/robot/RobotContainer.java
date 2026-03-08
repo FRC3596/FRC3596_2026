@@ -63,6 +63,7 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser();
     NamedCommands.registerCommand("FarFire", m_shooterComFar);
     NamedCommands.registerCommand("CloseFire", m_shooterComFar);
+    NamedCommands.registerCommand("Idler", m_shooterSlow);
     NamedCommands.registerCommand("Agitate", m_agitatorCom);
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -80,7 +81,7 @@ public class RobotContainer {
     m_driverController.rightBumper().whileTrue(m_shooterSlow);
     m_driverController.y().whileTrue(m_agitatorCom);
    // m_driverController.rightTrigger().whileTrue(m_FeederCom);
-    m_RightJoystick.button(2).onTrue(new InstantCommand(swerve::resetPose));
+    m_RightJoystick.button(3).onTrue(new InstantCommand(swerve::resetPose));
     //  m_driverController.povUp()
     //      .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()

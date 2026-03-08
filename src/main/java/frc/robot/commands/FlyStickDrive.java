@@ -38,7 +38,7 @@ addRequirements(m_swerve);
   public void execute() {
     m_swerve.control(Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getX(), 
                      Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getY(),
-                     6*m_rightJoystick.getX());
+                     12*m_rightJoystick.getX());
   }
 
   // Called once the command ends or is interrupted.

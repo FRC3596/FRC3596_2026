@@ -50,10 +50,13 @@ public class IntakeSub extends SubsystemBase {
   public void periodic() {
     kCosValue = SmartDashboard.getNumber("kCos Value", 0);
     PIDConfig.feedForward.kCos(kCosValue);
+
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
     SmartDashboard.putNumber("Pivot setpoint", pivotPID.getSetpoint());
     SmartDashboard.putNumber("PID out", pivotIntake1.getAppliedOutput());
+    SmartDashboard.putNumber("follower moter out", pivotIntake2.get());
+
   }
 
   public void runIntake(double speed) {
