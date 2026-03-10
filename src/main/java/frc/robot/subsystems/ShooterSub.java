@@ -62,5 +62,9 @@ public class ShooterSub extends SubsystemBase {
     PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
 
   }
+  public double ShooterVelocity() {
+    return encoder.getVelocity();
+  }
+  
 
 }
