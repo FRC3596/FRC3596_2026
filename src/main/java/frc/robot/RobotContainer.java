@@ -72,7 +72,7 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser();
     NamedCommands.registerCommand("FarFire", m_shooterComFar);
     NamedCommands.registerCommand("CloseFire", m_shooterComFar);
-    NamedCommands.registerCommand("Idler", m_shooterSlow);
+    NamedCommands.registerCommand("Idle", m_shooterSlow);
     NamedCommands.registerCommand("Agitate", m_agitatorCom);
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
