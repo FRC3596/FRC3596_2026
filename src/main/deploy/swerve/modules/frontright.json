@@ -17,7 +17,7 @@
 
   },
   "encoder": {
-    "type": "attached",
+    "type": "canandmag",
     "id": 0,
     "canbus": null
   },
