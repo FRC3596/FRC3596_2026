@@ -27,26 +27,27 @@ public class RobotContainer {
   private final StorageSub m_storageSub = new StorageSub();
   private final IntakeSub m_intakeSub = new IntakeSub();
   private final ShooterSub m_shooterSub = new ShooterSub();
-  //private final FeederSub m_FeederSub = new FeederSub();
+  // private final FeederSub m_FeederSub = new FeederSub();
   private final CommandXboxController m_driverController = new CommandXboxController(
       Constants.DriverStation.xboxControllerID);
   private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.autoAgitatorSpeed);
   private final IntakeCom m_intakeCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeRollerSpeed);
   private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
-   private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.ShortShooterSpeed);
-   private final ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);;  //private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
-  //private final ClimberSub m_ClimberSub = new ClimberSub();
+  private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.ShortShooterSpeed);
+  private final ShooterCom m_shooterComOff = new ShooterCom(m_shooterSub, 0);
+  private final ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);; // private final FeederCom m_FeederCom = new
+                                                                         // FeederCom(m_FeederSub);
+  // private final ClimberSub m_ClimberSub = new ClimberSub();
 
   SwerveSub swerve = new SwerveSub();
   CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   XboxDriveCom teleopDriveCommand = new XboxDriveCom(swerve, xboxController);
 
-
   public RobotContainer() {
     configureBindings();
 
     // swerve.setDefaultCommand(teleopDriveCommand);
-   // m_shooterSub.setDefaultCommand(Idle);
+    // m_shooterSub.setDefaultCommand(Idle);
   }
 
   private void configureBindings() {
@@ -54,11 +55,14 @@ public class RobotContainer {
     m_driverController.b().whileTrue(m_shooterComFar);
     m_driverController.leftBumper().whileTrue(m_shooterComClose);
     m_driverController.y().whileTrue(m_agitatorCom);
-   // m_driverController.rightTrigger().whileTrue(m_FeederCom);
+    m_driverController.x().whileTrue(m_shooterComOff);
+    // m_driverController.rightTrigger().whileTrue(m_FeederCom);
     // m_driverController.povUp()
-    //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
+    // .onTrue(new InstantCommand(() ->
+    // m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()
-    //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
+    // .onTrue(new InstantCommand(() ->
+    // m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
   }
 
   public Command getAutonomousCommand() {
