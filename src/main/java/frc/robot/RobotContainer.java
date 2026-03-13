@@ -84,7 +84,7 @@ public class RobotContainer {
 
 
   private void configureBindings() {
-    m_driverController.b().whileTrue(m_shooterComFar);
+   m_driverController.b().whileTrue(m_shooterComFar);
     m_driverController.y().whileTrue(m_shooterComClose);
     m_driverController.x().whileTrue(m_shooterSlow);
     m_driverController.a().whileTrue(m_agitatorCom);
@@ -95,7 +95,7 @@ public class RobotContainer {
     m_driverController.axisGreaterThan(3, 0.5).whileTrue(m_RollerInCom);
     m_driverController.axisGreaterThan(2, 0.5).whileTrue(m_RollerOutCom);
     //m_driverController.button(9).whileTrue(m_invertedAgitatorCom);
-   // m_driverController.rightTrigger().whileTrue(m_FeederCom);
+   // m_driverController.rightTrigger().whileTrue(m_FeederCom);  */
     m_RightJoystick.button(3).onTrue(new InstantCommand(swerve::resetPose));
     //  m_driverController.povUp()
     //      .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
