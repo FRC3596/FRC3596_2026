@@ -39,8 +39,8 @@ public class ShooterSub extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Motor Velocity", encoder.getVelocity());
-    SmartDashboard.putNumber("Motor Target Velocity (RPM)", PID.getSetpoint());
+    SmartDashboard.putNumber("Shooter Velocity", encoder.getVelocity());
+    SmartDashboard.putNumber("Shooter Target Velocity (RPM)", PID.getSetpoint());
     // This method will be called once per scheduler run
   }
     public void defaultIdleSpeed() {
@@ -62,5 +62,9 @@ public class ShooterSub extends SubsystemBase {
     PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
 
   }
+  public double ShooterVelocity() {
+    return encoder.getVelocity();
+  }
+  
 
 }

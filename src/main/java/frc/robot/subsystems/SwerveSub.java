@@ -3,9 +3,19 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
+import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utils.Constants;
+
 import java.io.File;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
 import swervelib.SwerveDrive;
@@ -19,20 +29,63 @@ public class SwerveSub extends SubsystemBase {
 
   /** Creates a new SwerveSub. */
   public SwerveSub() {
-    final double maximumSpeed = Units.feetToMeters(4.5);
+    final double maximumSpeed = Constants.DriverStation.DriveSpeedMultiplier;
     File directory = new File(Filesystem.getDeployDirectory(), "swerve");
     try {
-      //loki wSA hare 1/17/26
+      // loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
-      System.out.println("The swerve did not generate; womp womp !!!!!!!!!!!!! :( :( :( ");
+      System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
     }
+    // All other subsystem initialization
+    // ...
+
+    // Load the RobotConfig from the GUI settings. You should probably
+    // store this in your Constants file
+    RobotConfig config;
+    try {
+      config = RobotConfig.fromGUISettings();
+    } catch (Exception e) {
+      // Handle exception as needed
+      e.printStackTrace();
+      config = null;
+    }
+
+    // Configure AutoBuilder last
+    AutoBuilder.configure(
+        m_swerve::getPose, // Robot pose supplier
+        m_swerve::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+        m_swerve::getRobotVelocity, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+        (speeds, feedforwards) -> m_swerve.drive(speeds), // Method that will drive the robot given ROBOT RELATIVE
+                                                          // ChassisSpeeds. Also optionally outputs individual module
+                                                          // feedforwards
+        new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic
+                                        // drive trains
+            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
+        ),
+        config, // The robot configuration
+        () -> {
+          // Boolean supplier that controls when the path will be mirrored for the red
+          // alliance
+          // This will flip the path being followed to the red side of the field.
+          // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+          var alliance = DriverStation.getAlliance();
+          if (alliance.isPresent()) {
+            return alliance.get() == DriverStation.Alliance.Red;
+          }
+          return false;
+        },
+        this // Reference to this subsystem to set requirements
+    );
   }
-//X and Y velos = meters/second, rotational velo = radians/second
+
+  // X and Y velos = meters/second, rotational velo = radians/second
   public void control(double xVelo, double yVelo, double rotVelo) {
 
-    ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo); //(considering adding 2.22 multiplyer to rotvelo)
-    m_swerve.drive(velocity);
+    ChassisSpeeds velocity = new ChassisSpeeds(yVelo, xVelo, rotVelo);
+    m_swerve.driveFieldOriented(velocity);
 
   }
 public Rotation2d getYaw(){
@@ -41,10 +94,13 @@ return m_swerve.getOdometryHeading();
 public Pose2d getPose(){
   return m_swerve.getPose();
 }
-
+public void resetPose() {
+  m_swerve.zeroGyro();
+}
   @Override
   public void periodic() {
 
     // This method will be called once per scheduler runs
   }
+
 }

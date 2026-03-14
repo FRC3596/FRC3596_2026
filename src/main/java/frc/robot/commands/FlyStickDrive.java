@@ -4,21 +4,26 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.SwerveSub;
+import frc.robot.utils.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class XboxDriveCom extends Command {
+public class FlyStickDrive extends Command {
 
   CommandXboxController xboxController;
-  SwerveSub swerve;
+  private final SwerveSub m_swerve;
+  private final CommandJoystick m_leftJoystick;
+  private final CommandJoystick m_rightJoystick;
 
   /** Creates a new XboxDrive. */
-  public XboxDriveCom(SwerveSub swerve, CommandXboxController xboxController) {
-    this.swerve = swerve;
-    this.xboxController = xboxController;
-addRequirements(swerve);
+  public FlyStickDrive(SwerveSub swerve, CommandJoystick leftJoystick, CommandJoystick rightJoystick) {
+    m_swerve = swerve;
+    m_leftJoystick = leftJoystick;
+    m_rightJoystick = rightJoystick;
+addRequirements(m_swerve);
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +36,9 @@ addRequirements(swerve);
   // XBox controller controls swerve modules
   @Override
   public void execute() {
-    swerve.control(xboxController.getLeftX(),-xboxController.getLeftY(),xboxController.getRightX());
+    m_swerve.control(Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getX(), 
+                     Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getY(),
+                     12*m_rightJoystick.getX());
   }
 
   // Called once the command ends or is interrupted.

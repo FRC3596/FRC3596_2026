@@ -1,11 +1,14 @@
 package frc.robot.utils;
 
+import edu.wpi.first.math.util.Units;
+
 public class Constants {
 
     public class DriverStation {
         public static final int xboxControllerID = 0;
         public static final int leftFlightStickID = 1;
         public static final int rightFlightStickID = 2;
+        public static final double DriveSpeedMultiplier = Units.feetToMeters(15.724);;
     }
 
     public class CANBus {
@@ -37,20 +40,20 @@ public class Constants {
 
     public class Manipulator {
 
-        public static final double autoAgitatorSpeed = -.3;
-        public static final double autoIntakeSpeed = 0.5;
+        public static final double autoAgitatorSpeed = -1;
+        public static final double autoIntakeSpeed = 1;
         public static final double autoShooterSpeed = 1000;
-        public static final double shooterProportion = 0.001;
+        public static final double shooterProportion = 0.002;
         public static final double shooterIntegral = 0;
-        public static final double shooterDerivative = 0;
+        public static final double shooterDerivative = 20;
         public static final double feederProportion = 0;
         public static final double feederIntegral = 0;
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
-        public static final double intakeDownRotations = -1.190476894378662; //gear ratio * output rotations
-        public static final double pivotProportion = 0.5; //go to xx% speed at full error
+        public static final double intakeDownRotations = -1.190476894378662 * 4; //gear ratio * output rotations
+        public static final double pivotProportion = 2; //go to xx% speed at full error
         public static final double pivotDerivative = 0;
-        public static final double pivotIntegral = 0;
+        public static final double pivotIntegral = 0.5;
         public static final double climberLProportion = 0;
         public static final double climberLDerivative = 0;
         public static final double climberLIntegral = 0;
@@ -58,11 +61,13 @@ public class Constants {
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
         public static final double intakeRollerSpeed = 1;
-        public static final double LongShooterSpeed = 5500;
-        public static final double ShortShooterSpeed = 3500;
+
+        public static final double LongShooterSpeed = 3700;
+        public static final double MediumShooterSpeed = 3000;
+        public static final double ShortShooterSpeed = 500;
 
         public static final double idleSpeed = 0;
-        public static final double FeederSpeed = 0;
+        public static final double FeederSpeed = .8;
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
 
