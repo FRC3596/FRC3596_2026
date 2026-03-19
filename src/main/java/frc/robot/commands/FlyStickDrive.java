@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.SwerveSub;
 import frc.robot.utils.Constants;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -36,9 +37,9 @@ addRequirements(m_swerve);
   // XBox controller controls swerve modules
   @Override
   public void execute() {
-    m_swerve.control(Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getX(), 
-                     Constants.DriverStation.DriveSpeedMultiplier * m_leftJoystick.getY(),
-                     12*m_rightJoystick.getX());
+    m_swerve.control(Constants.DriverStation.DriveSpeedMultiplier * MathUtil.applyDeadband(m_leftJoystick.getX(), 0.05), 
+                     Constants.DriverStation.DriveSpeedMultiplier * MathUtil.applyDeadband(m_leftJoystick.getY(),0.05),
+                     12* MathUtil.applyDeadband(m_rightJoystick.getX(), 0.05));
   }
 
   // Called once the command ends or is interrupted.

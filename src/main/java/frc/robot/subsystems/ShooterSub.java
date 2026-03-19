@@ -20,21 +20,29 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class ShooterSub extends SubsystemBase {
-  private final SparkMax motor = new SparkMax(Constants.CANBus.shooter, MotorType.kBrushless);
-  private SparkMaxConfig shooterConfig = new SparkMaxConfig();
+  private final SparkMax motor1 = new SparkMax(Constants.CANBus.shooter1, MotorType.kBrushless);
+  private final SparkMax motor2 = new SparkMax(Constants.CANBus.shooter2, MotorType.kBrushless);
+  private SparkMaxConfig shooter1Config = new SparkMaxConfig();
+  private SparkMaxConfig shooter2Config = new SparkMaxConfig();
   private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
-  private final SparkClosedLoopController PID = motor.getClosedLoopController();
-  private final RelativeEncoder encoder = motor.getEncoder();
+  private final SparkClosedLoopController PID = motor1.getClosedLoopController();
+  private final RelativeEncoder encoder = motor1.getEncoder();
 
   /** Creates a new ShooterSub. */
   public ShooterSub() {
 
     PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative).outputRange(0, 1);
-    shooterConfig.idleMode(IdleMode.kCoast);
-    shooterConfig.apply(PIDConfig);
-    
-    motor.configure(shooterConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+
+    shooter1Config.idleMode(IdleMode.kCoast);
+
+    shooter1Config.apply(PIDConfig);
+
+    motor1.configure(shooter1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+
+    shooter2Config.follow(motor1, true);
+
+    motor2.configure(shooter2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
 
   @Override
@@ -43,14 +51,14 @@ public class ShooterSub extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Target Velocity (RPM)", PID.getSetpoint());
     // This method will be called once per scheduler run
   }
-    public void defaultIdleSpeed() {
-  customIdleSpeed(Constants.Manipulator.idleSpeed);
-  }
 
+  public void defaultIdleSpeed() {
+    customIdleSpeed(Constants.Manipulator.idleSpeed);
+  }
 
   public void customIdleSpeed(double customIdleSpeed) {
     if ((encoder.getVelocity() > customIdleSpeed)) {
-      motor.set(0);
+      motor1.set(0);
     } else {
       PID.setSetpoint(customIdleSpeed, SparkBase.ControlType.kVelocity);
 
@@ -62,9 +70,9 @@ public class ShooterSub extends SubsystemBase {
     PID.setSetpoint(speedRPM, SparkBase.ControlType.kVelocity);
 
   }
+
   public double ShooterVelocity() {
     return encoder.getVelocity();
   }
-  
 
 }

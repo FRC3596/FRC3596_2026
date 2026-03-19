@@ -31,7 +31,8 @@ public class Constants {
 
         // Shooters 31-40
         public static final int feeder = 31;
-        public static final int shooter = 32;
+        public static final int shooter1 = 32;
+        public static final int shooter2 = 33;
         // Climb 41-50
         public static final int climb1 = 41;
         public static final int climb2 = 42;
@@ -50,8 +51,8 @@ public class Constants {
         public static final double feederIntegral = 0;
         public static final double feederDerivative = 0;
         public static final double intakeUpRotations = 0;
-        public static final double intakeDownRotations = -1.190476894378662 * 4; //gear ratio * output rotations
-        public static final double pivotProportion = 2; //go to xx% speed at full error
+        public static final double intakeDownRotations = -1.190476894378662 * 4; // gear ratio * output rotations
+        public static final double pivotProportion = 2; // go to xx% speed at full error
         public static final double pivotDerivative = 0;
         public static final double pivotIntegral = 0.5;
         public static final double climberLProportion = 0;
@@ -70,20 +71,20 @@ public class Constants {
         public static final double FeederSpeed = .8;
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
+        public static final double currentDerivLim = 10;
 
-    }
+        public class FieldConstants {
 
-    public class FieldConstants {
+            public static final double redGoalY = 0;
+            public static final double redGoalX = 0;
+            public static final double blueGoalY = 0;
+            public static final double blueGoalX = 0;
+            public static final double redClimberY = 0;
+            public static final double redClimberX = 0;
+            public static final double blueClimberY = 0;
+            public static final double blueClimberX = 0;
 
-        public static final double redGoalY = 0;
-        public static final double redGoalX = 0;
-        public static final double blueGoalY = 0;
-        public static final double blueGoalX = 0;
-        public static final double redClimberY = 0;
-        public static final double redClimberX = 0;
-        public static final double blueClimberY = 0;
-        public static final double blueClimberX = 0;
+        }
 
-    }
-
+}
 }
