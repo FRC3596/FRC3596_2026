@@ -31,7 +31,8 @@ public class Constants {
 
         // Shooters 31-40
         public static final int feeder = 31;
-        public static final int shooter = 32;
+        public static final int shooter1 = 32;
+        public static final int shooter2 = 33;
         // Climb 41-50
         public static final int climb1 = 41;
         public static final int climb2 = 42;

@@ -43,8 +43,7 @@ public class IntakeSub extends SubsystemBase {
   @Override
   public void periodic() {
     if (pastPosition != p1encoder.getPosition()) {
-      if (Math.abs((Intake1.getOutputCurrent() - pastCurrentOutput)/
-      (p1encoder.getPosition() - pastPosition)) > Constants.Manipulator.currentDerivLim) {
+      if (Math.abs((Intake1.getOutputCurrent() - pastCurrentOutput)/(p1encoder.getPosition() - pastPosition)) > Constants.Manipulator.currentDerivLim) {
         tripOutput = Intake1.get();
         trip = true;
       }
@@ -60,11 +59,9 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double speed) {
-    if(((speed/tripOutput) > 0) && trip) {
-    }
-    
-    else {
+    if(!(((speed/tripOutput) > 0) && trip)) {  
       Intake1.set(speed);
+      trip = false; 
     }
   }
 
