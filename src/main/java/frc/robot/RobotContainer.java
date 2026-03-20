@@ -84,11 +84,11 @@ public class RobotContainer {
 
 
   private void configureBindings() {
-   /*m_driverController.b().whileTrue(m_shooterComFar);
+   m_driverController.b().whileTrue(m_shooterComFar);
     m_driverController.y().whileTrue(m_shooterComClose);
     m_driverController.x().whileTrue(m_shooterSlow);
-    m_driverController.a().whileTrue(m_agitatorCom);
-    m_driverController.a().whileTrue(m_FeederCom);
+    // m_driverController.a().whileTrue(m_agitatorCom);
+    // m_driverController.a().whileTrue(m_FeederCom);
 
     //m_driverController.rightBumper().whileTrue(m_intakeDownCom);
     //m_driverController.leftBumper().whileTrue(m_intakeUpCom);
