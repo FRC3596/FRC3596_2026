@@ -5,13 +5,19 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "stay still"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "CloseFire"
+                  "name": "FarFire"
                 }
               },
               {
@@ -32,7 +38,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Idler"
+            "name": "Off"
           }
         }
       ]

@@ -37,7 +37,7 @@ public class IntakeSub extends SubsystemBase {
 
     p2Config.follow(Intake1, true);
     Intake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-
+//TODO set inverted to false with new gearbox
   }
 
   @Override

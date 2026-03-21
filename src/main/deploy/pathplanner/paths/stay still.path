@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.904493975903614,
-        "y": 2.9750120481927707
+        "x": 2.0,
+        "y": 7.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.751506024096385,
-        "y": 3.291915662650601
+        "x": 2.25,
+        "y": 7.0
       },
       "isLocked": false,
-      "linkedName": "shoot endpoint"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.412975903614458,
-        "y": 0.43978313253011947
+        "x": 2.0,
+        "y": 7.0
       },
       "prevControl": {
-        "x": 0.5659638554216875,
-        "y": 0.7785421686746979
+        "x": 1.75,
+        "y": 7.0
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 30.256437163529416
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

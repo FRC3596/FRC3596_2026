@@ -66,6 +66,7 @@ public class Constants {
         public static final double LongShooterSpeed = 3700;
         public static final double MediumShooterSpeed = 3000;
         public static final double ShortShooterSpeed = 500;
+         public static final double offShooterSpeed = 0;
 
         public static final double idleSpeed = 0;
         public static final double FeederSpeed = .8;
