@@ -41,15 +41,14 @@ public class RobotContainer {
   private final FeederSub m_FeederSub = new FeederSub();
   private final StorageSub m_storageSub = new StorageSub(m_shooterSub);
 
-  private final CommandXboxController m_driverController = new CommandXboxController(
-      Constants.DriverStation.xboxControllerID);
+  private final CommandXboxController m_driverController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   private final CommandJoystick m_LeftJoystick = new CommandJoystick(Constants.DriverStation.leftFlightStickID);
   private final CommandJoystick m_RightJoystick = new CommandJoystick(Constants.DriverStation.rightFlightStickID);
   private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.autoAgitatorSpeed);
   // private final AgitatorCom m_invertedAgitatorCom = new
   // AgitatorCom(m_storageSub, -Constants.Manipulator.autoAgitatorSpeed);
-  private final IntakeCom m_intakeDownCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeDownRotations);
-  private final IntakeCom m_intakeUpCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeUpRotations);
+  private final IntakeCom m_intakeOut= new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedOut);
+  private final IntakeCom m_intakeIn = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedIn);
   private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
   private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.MediumShooterSpeed);
   private final ShooterCom m_shooterSlow = new ShooterCom(m_shooterSub, Constants.Manipulator.ShortShooterSpeed);
@@ -86,6 +85,8 @@ public class RobotContainer {
     m_driverController.y().whileTrue(m_shooterComClose);
     // m_driverController.x().whileTrue(m_shooterSlow);
     m_driverController.x().whileTrue(m_shooterOff);
+    m_driverController.povRight().whileTrue(m_intakeOut);
+     m_driverController.povLeft().whileTrue(m_intakeIn);
     // m_driverController.a().whileTrue(m_agitatorCom);
     // m_driverController.a().whileTrue(m_FeederCom);
     // m_driverController.rightBumper().whileTrue(m_intakeDownCom);

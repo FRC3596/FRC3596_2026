@@ -10,13 +10,13 @@ import frc.robot.subsystems.IntakeSub;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeCom extends Command {
   private final IntakeSub m_intakeSub;
-  private final double m_position;
+  private final double m_speed;
   
 //RyAn Wsa HerE
   /** Creates a new ManualIntakeCom. */
-  public IntakeCom(IntakeSub intakeSub, double position) {
+  public IntakeCom(IntakeSub intakeSub, double speed) {
     m_intakeSub = intakeSub;
-    m_position = position;
+    m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_intakeSub);
   }
@@ -24,7 +24,7 @@ public class IntakeCom extends Command {
   @Override
   public void initialize() {
   
-    m_intakeSub.motorPoseSet(m_position);
+    m_intakeSub.runIntake(m_speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

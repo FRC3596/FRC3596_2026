@@ -62,6 +62,9 @@ public class Constants {
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
         public static final double intakeRollerSpeed = 1;
+        public static final double IntakeIntegral = 0;
+        public static final double IntakeProportion = 0;
+        public static final double IntakeDerivative = 0;
 
         public static final double LongShooterSpeed = 3700;
         public static final double MediumShooterSpeed = 3000;
@@ -73,6 +76,10 @@ public class Constants {
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
         public static final double currentDerivLim = 10;
+//intake speeds
+        public static final double intakeSpeedOut = 0;
+         public static final double intakeSpeedIn = 0;
+
 
         public class FieldConstants {
 

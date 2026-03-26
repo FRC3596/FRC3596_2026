@@ -35,15 +35,16 @@ public class IntakeSub extends SubsystemBase {
     p1Config.smartCurrentLimit(20);
     Intake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    p2Config.follow(Intake1, true);
+    p2Config.follow(Intake1, false);
     Intake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-//TODO set inverted to false with new gearbox
+    // TODO set inverted to false with new gearbox (DONE)!!
   }
 
   @Override
   public void periodic() {
     if (pastPosition != p1encoder.getPosition()) {
-      if (Math.abs((Intake1.getOutputCurrent() - pastCurrentOutput)/(p1encoder.getPosition() - pastPosition)) > Constants.Manipulator.currentDerivLim) {
+      if (Math.abs((Intake1.getOutputCurrent() - pastCurrentOutput)
+          / (p1encoder.getPosition() - pastPosition)) > Constants.Manipulator.currentDerivLim) {
         tripOutput = Intake1.get();
         trip = true;
       }
@@ -59,13 +60,12 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double speed) {
-    if(!(((speed/tripOutput) > 0) && trip)) {  
+    if (!(((speed / tripOutput) > 0) && trip)) {
       Intake1.set(speed);
-      trip = false; 
+      trip = false;
+    } else {
+      Intake1.set(0);
     }
   }
 
-  public void motorPoseSet(double PoseRotations) {
-
-  }
 }
