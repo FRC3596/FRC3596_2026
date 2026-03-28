@@ -44,7 +44,7 @@ public class Constants {
         public static final double autoAgitatorSpeed = -1;
         public static final double autoIntakeSpeed = 1;
         public static final double autoShooterSpeed = 1000;
-        public static final double shooterProportion = 0.01;
+        public static final double shooterProportion = 0.4;
         public static final double shooterIntegral = 0;
         public static final double shooterDerivative = 0;
         public static final double feederProportion = 0;

@@ -33,6 +33,7 @@ public class ShooterSub extends SubsystemBase {
 
       PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative).outputRange(-1, 1);
+      // PIDConfig.feedForward.sva(0, 1/473, 0);
 
     shooter1Config.idleMode(IdleMode.kCoast);
 
