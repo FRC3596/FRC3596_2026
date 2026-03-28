@@ -31,7 +31,7 @@ public class ShooterSub extends SubsystemBase {
   /** Creates a new ShooterSub. */
   public ShooterSub() {
 
-    PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
+      PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
         Constants.Manipulator.shooterDerivative).outputRange(-1, 1);
 
     shooter1Config.idleMode(IdleMode.kCoast);
@@ -41,7 +41,9 @@ public class ShooterSub extends SubsystemBase {
 
     motor1.configure(shooter1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    shooter2Config.follow(motor1, true);
+    shooter2Config.idleMode(IdleMode.kCoast);
+
+    shooter2Config.follow(8, false); //change back
 
     motor2.configure(shooter2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }
@@ -49,6 +51,7 @@ public class ShooterSub extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter Velocity", encoder.getVelocity());
+    SmartDashboard.putNumber("PID Shooter out", motor1.getAppliedOutput());
     SmartDashboard.putNumber("Shooter Target Velocity (RPM)", PID.getSetpoint());
     // This method will be called once per scheduler run
   }

@@ -44,9 +44,9 @@ public class Constants {
         public static final double autoAgitatorSpeed = -1;
         public static final double autoIntakeSpeed = 1;
         public static final double autoShooterSpeed = 1000;
-        public static final double shooterProportion = 0.002;
+        public static final double shooterProportion = 0.01;
         public static final double shooterIntegral = 0;
-        public static final double shooterDerivative = 20;
+        public static final double shooterDerivative = 0;
         public static final double feederProportion = 0;
         public static final double feederIntegral = 0;
         public static final double feederDerivative = 0;
@@ -67,7 +67,7 @@ public class Constants {
         public static final double IntakeDerivative = 0;
 
         public static final double LongShooterSpeed = 3700;
-        public static final double MediumShooterSpeed = 3000;
+        public static final double MediumShooterSpeed = 120; //TODO change back to 3000
         public static final double ShortShooterSpeed = 500;
          public static final double offShooterSpeed = 0;
 

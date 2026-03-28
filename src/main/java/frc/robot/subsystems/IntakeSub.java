@@ -19,6 +19,88 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class IntakeSub extends SubsystemBase {
+  private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
+  private final SparkMax pivotIntake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
+  private final SparkMax pivotIntake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
+  private SparkMaxConfig p2Config = new SparkMaxConfig();
+  private SparkMaxConfig p1Config = new SparkMaxConfig();
+  private ClosedLoopConfig PIDConfig = new ClosedLoopConfig();
+  private final RelativeEncoder p1encoder = pivotIntake1.getEncoder();
+  private final SparkClosedLoopController pivotPID = pivotIntake1.getClosedLoopController();
+  private double kCosValue = 2;
+
+  /** Creates a new IntakeSub. */
+  public IntakeSub() {
+    //PIDConfig.feedForward.kCosRatio(0);
+    kCosValue = SmartDashboard.getNumber("kCos Value", 0);
+    PIDConfig.pid(Constants.Manipulator.pivotProportion, Constants.Manipulator.pivotIntegral,
+        Constants.Manipulator.pivotDerivative).outputRange(-1, 1);
+    p1Config.apply(PIDConfig);
+    p1Config.smartCurrentLimit(10);
+    pivotIntake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    
+    p2Config.follow(pivotIntake1, true);
+    p2Config.smartCurrentLimit(10);
+  //  p2Config.apply(PIDConfig);
+    pivotIntake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+  }
+
+
+  @Override
+  public void periodic() {
+    kCosValue = SmartDashboard.getNumber("kCos Value", 0);
+    PIDConfig.feedForward.kCos(kCosValue);
+
+    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
+    SmartDashboard.putNumber("Pivot setpoint", pivotPID.getSetpoint());
+    SmartDashboard.putNumber("PID out", pivotIntake1.getAppliedOutput());
+    SmartDashboard.putNumber("follower moter out", pivotIntake2.get());
+
+  }
+
+  public void runIntake(double speed) {
+   if (Math.abs(p1encoder.getPosition()) > Math.abs(Constants.Manipulator.intakeDownRotations/2))
+   { 
+    Roller1.set(speed);
+    SmartDashboard.putBoolean("Rollers Active", true);
+  }
+  else {
+    Roller1.set(0);
+    SmartDashboard.putBoolean("Rollers Active", false);
+  }
+  }
+
+  public void motorPoseSet(double PoseRotations) {
+
+    pivotPID.setSetpoint(PoseRotations, SparkBase.ControlType.kPosition);
+  }
+
+}
+
+
+
+/*// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import com.revrobotics.PersistMode;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ResetMode;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.ClosedLoopConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.utils.Constants;
+
+public class IntakeSub extends SubsystemBase {
 
   private final SparkMax Intake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
   private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
@@ -69,3 +151,4 @@ public class IntakeSub extends SubsystemBase {
   }
 
 }
+*/
