@@ -11,11 +11,15 @@ import frc.robot.subsystems.IntakeSub;
 public class RollerCom extends Command {
   private final IntakeSub m_IntakeSub;
   private final double m_Speed;
+  private final double m_targetPose;
   /** Creates a new RollerCom. */
-  public RollerCom(IntakeSub intakeSub, double speed) {
+  public RollerCom(IntakeSub intakeSub, double speed, double desiredPose) {
     m_IntakeSub = intakeSub;
     m_Speed = speed;
+    m_targetPose = desiredPose;
 
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_IntakeSub);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

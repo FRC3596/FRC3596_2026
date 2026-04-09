@@ -32,19 +32,19 @@ public class ShooterSub extends SubsystemBase {
   public ShooterSub() {
 
       PIDConfig.pid(Constants.Manipulator.shooterProportion, Constants.Manipulator.shooterIntegral,
-        Constants.Manipulator.shooterDerivative).outputRange(-1, 1);
+        Constants.Manipulator.shooterDerivative).outputRange(0, 1);
       // PIDConfig.feedForward.sva(0, 1/473, 0);
 
     shooter1Config.idleMode(IdleMode.kCoast);
 
     shooter1Config.apply(PIDConfig);
-    shooter1Config.inverted(false);
+    shooter1Config.inverted(true);
 
     motor1.configure(shooter1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
     shooter2Config.idleMode(IdleMode.kCoast);
 
-    shooter2Config.follow(8, false); //change back
+    shooter2Config.follow(motor1, false); //change back
 
     motor2.configure(shooter2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
   }

@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class FeederCom extends Command {
 
 private final FeederSub m_feederSub;
+private final double m_speed;
   /** Creates a new FeederCom. */
-  public FeederCom(FeederSub feederSub) {
-m_feederSub = feederSub; 
+  public FeederCom(FeederSub feederSub, double speed) {
+    m_feederSub = feederSub; 
+    m_speed = speed;
  }
 
   // Called when the command is initially scheduled.
@@ -25,7 +27,7 @@ m_feederSub = feederSub;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
- m_feederSub.runFeeder(Constants.Manipulator.FeederSpeed);
+ m_feederSub.runFeeder(m_speed);
   }
 
   // Called once the command ends or is interrupted.
