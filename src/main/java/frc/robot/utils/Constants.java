@@ -22,9 +22,11 @@ public class Constants {
         public static final int BLAngle = 6;
         public static final int BLDrive = 5;
         // Intake 11-20
-        public static final int Intake1 = 11;
-        public static final int pivotIntake1 = 12;
-        public static final int pivotIntake2 = 13;
+        public static final int RollerIntake1 = 11;
+        public static final int RollerIntake2 = 12;
+
+        public static final int pivotIntake1 = 13;
+        public static final int pivotIntake2 = 14;
 
         // Agitators 21-30
         public static final int agitator = 21;
@@ -61,7 +63,7 @@ public class Constants {
         public static final double climberRProportion = 0;
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
-        public static final double intakeRollerSpeed = 1;
+        public static final double intakeRollerSpeed = 0;
         public static final double IntakeIntegral = 0;
         public static final double IntakeProportion = 0;
         public static final double IntakeDerivative = 0;
@@ -75,12 +77,13 @@ public class Constants {
         public static final double FeederSpeed = .8;
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
-        public static final double currentDerivLim = 10;
+        public static final double CurrentLim = 10;
+         public static final double minPoseForRollerAndLimSwitch = 0;
 //intake speeds
         public static final double intakeSpeedOut = 0;
          public static final double intakeSpeedIn = 0;
 
-
+public static final int LimSwitchInput = 0;
         public class FieldConstants {
 
             public static final double redGoalY = 0;

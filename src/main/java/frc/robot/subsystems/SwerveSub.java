@@ -35,7 +35,7 @@ public class SwerveSub extends SubsystemBase {
       // loki wSA hare 1/17/26
       m_swerve = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
     } catch (Exception e) {
-      System.out.println("The swerve did not generate; womp womp !!!!!!!!!! :(");
+      System.out.println("The swerve didn't generate; womp womp !!!!!!!!!! :(");
     }
     // All other subsystem initialization
     // ...

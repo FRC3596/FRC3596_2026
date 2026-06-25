@@ -40,6 +40,8 @@ addRequirements(m_swerve);
     m_swerve.control(Constants.DriverStation.DriveSpeedMultiplier * MathUtil.applyDeadband(m_leftJoystick.getX(), 0.05), 
                      Constants.DriverStation.DriveSpeedMultiplier * MathUtil.applyDeadband(m_leftJoystick.getY(),0.05),
                      12* MathUtil.applyDeadband(m_rightJoystick.getX(), 0.05));
+
+                     System.out.println(m_leftJoystick.getY());
   }
 
   // Called once the command ends or is interrupted.
