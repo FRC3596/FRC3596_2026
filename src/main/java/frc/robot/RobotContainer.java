@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import org.opencv.features2d.AgastFeatureDetector;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
@@ -38,7 +40,7 @@ public class RobotContainer {
   private final IntakeSub m_intakeSub = new IntakeSub();
   private final ShooterSub m_shooterSub = new ShooterSub();
   private final FeederSub m_FeederSub = new FeederSub();
-  private final StorageSub m_storageSub = new StorageSub(m_shooterSub);
+  private final StorageSub m_StorageSub = new StorageSub(m_shooterSub);
 
   private final CommandXboxController m_driverController = new CommandXboxController(
     Constants.DriverStation.xboxControllerID);
@@ -54,7 +56,7 @@ public class RobotContainer {
   private final IntakeCom m_intakeForwardCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedOut,
       Constants.Manipulator.intakeRollerSpeed);
   private final IntakeCom m_intakeNotmoving = new IntakeCom(m_intakeSub, 0, Constants.Manipulator.intakeRollerSpeed);
-
+private final AgitatorCom m_runAgitator = new AgitatorCom(m_StorageSub, Constants.Manipulator.agitatorSpeed);
   // private final IntakeCom m_intakeDownCom = new IntakeCom(m_intakeSub,
   // Constants.Manipulator.intakeDownRotations);
   // private final IntakeCom m_intakeUpCom = new IntakeCom(m_intakeSub,
@@ -99,6 +101,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     m_driverController.b().whileTrue(m_shooterComFar);
+    m_driverController.b().whileTrue(m_runAgitator);
     m_driverController.y().whileTrue(m_shooterComClose);
     m_driverController.x().whileTrue(m_shooterOff);
 

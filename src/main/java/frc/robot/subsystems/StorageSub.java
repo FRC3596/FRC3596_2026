@@ -16,8 +16,11 @@ import frc.robot.utils.Constants;
 
 public class StorageSub extends SubsystemBase {
   // private final SparkMax agitator = new SparkMax(Constants.CANBus.agitator, MotorType.kBrushless);
- 
-  private SparkMaxConfig agitatorConfig = new SparkMaxConfig();
+  private final SparkMax loweragitator = new SparkMax(Constants.CANBus.loweragitator, MotorType.kBrushless);
+  private SparkMaxConfig loweragitatorConfig = new SparkMaxConfig();
+ private final SparkMax upperagitator = new SparkMax(Constants.CANBus.upperagitator, MotorType.kBrushless);
+  private SparkMaxConfig upperagitatorConfig = new SparkMaxConfig();
+  
   /** Creates a new StorageSub. */
   private final ShooterSub m_ShooterSub;
   public StorageSub(ShooterSub shooterSub) {
@@ -33,14 +36,15 @@ public class StorageSub extends SubsystemBase {
   }
 
 
-  public void runAgitator(double speed){
-    // if (m_ShooterSub.ShooterVelocity() >= 2000)
-    // { 
-    //   agitator.set(speed);
-    // }
-    // else {
-    //   agitator.set(0);
-    // }
+  public void runAgitator(double agitatorSpeed){
+   if(m_ShooterSub.ShooterVelocity() < Constants.Manipulator.minShooterSpeed){
+    loweragitator.set(0);
+  upperagitator.set(0);
+   }
+  else{
+  loweragitator.set(agitatorSpeed);
+  upperagitator.set(agitatorSpeed);
   }
 } 
 
+}

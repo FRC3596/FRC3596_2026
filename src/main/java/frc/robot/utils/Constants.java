@@ -39,6 +39,9 @@ public class Constants {
         public static final int climb1 = 41;
         public static final int climb2 = 42;
 
+        public static final int loweragitator = 0;
+        public static final int upperagitator = 0;
+
     }
 
     public class Manipulator {
@@ -80,14 +83,18 @@ public class Constants {
         public static final double CurrentLim = 10;
          public static final double minPoseForRollerAndLimSwitch = 0;
         public static final double currentDerivLim = 10;
-
+        public static final double maxIntakePose = 0;
+        public static final double minIntakePose = 0;
         public static final int maxPivotCurrentLimit = 5;
-
+    
 
         public static final double minEncoderpose = -0.4142857909202576;
 //intake speeds
         public static final double intakeSpeedOut = 0;
          public static final double intakeSpeedIn = 0;
+         
+         public static final double agitatorSpeed = 0;
+         public static final double minShooterSpeed = 0;
 
 public static final int LimSwitchInput = 0;
         public class FieldConstants {

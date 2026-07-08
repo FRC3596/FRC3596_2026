@@ -118,9 +118,13 @@ public class IntakeSub extends SubsystemBase {
   private SparkMaxConfig R2Config = new SparkMaxConfig();
 
   private final SparkMax Intake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
-  private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
-  private SparkMaxConfig p2Config = new SparkMaxConfig();
+
   private SparkMaxConfig p1Config = new SparkMaxConfig();
+
+private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
+
+  private SparkMaxConfig p2Config = new SparkMaxConfig();
+
   public final RelativeEncoder p1encoder = Intake1.getEncoder();
   private double pastCurrentOutput;
   private double pastPosition;
@@ -171,9 +175,25 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void runIntake(double intakeSpeed, double rollerSpeed) {
-    if ((((intakeSpeed / tripOutput) <= 0) && trip)) {
-      Intake1.set(intakeSpeed);
-      trip = false;}}
+    if(trip){
+      Intake1.set(0);
+       Roller1.set(0);
+    }
+    else if (((intakeSpeed > 0) && p1encoder.getPosition() >= Constants.Manipulator.maxIntakePose)) {
+      Intake1.set(0);
+     
+
+    }
+    else if (((intakeSpeed < 0) && p1encoder.getPosition() <= Constants.Manipulator.minIntakePose)){
+         Intake1.set(0);
+          Roller1.set(0);
+    }
+else{
+  Intake1.set(intakeSpeed);
+   Roller1.set(rollerSpeed);
+}
+}
+
   // private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
   // private final SparkMax pivotIntake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
   // private final SparkMax pivotIntake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
