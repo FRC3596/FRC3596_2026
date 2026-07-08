@@ -5,20 +5,25 @@
 package frc.robot.subsystems;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class FeederSub extends SubsystemBase {
   private final SparkMax feeder = new SparkMax(Constants.CANBus.feeder, MotorType.kBrushless);
+  private final SparkMax agitator = new SparkMax(Constants.CANBus.agitator, MotorType.kBrushless);
 
 
   public FeederSub() {
+    
   }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
   public void runFeeder(double speed) {
-    feeder.set(speed);
+    feeder.set(-speed);
+    agitator.set(speed);
   }
 }

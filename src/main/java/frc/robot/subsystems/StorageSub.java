@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class StorageSub extends SubsystemBase {
-  private final SparkMax agitator = new SparkMax(Constants.CANBus.agitator, MotorType.kBrushless);
+  // private final SparkMax agitator = new SparkMax(Constants.CANBus.agitator, MotorType.kBrushless);
  
   private SparkMaxConfig agitatorConfig = new SparkMaxConfig();
   /** Creates a new StorageSub. */
@@ -23,7 +23,7 @@ public class StorageSub extends SubsystemBase {
   public StorageSub(ShooterSub shooterSub) {
     m_ShooterSub = shooterSub;
 
-    agitator.configure(agitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    // agitator.configure(agitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
   }
 
@@ -34,13 +34,13 @@ public class StorageSub extends SubsystemBase {
 
 
   public void runAgitator(double speed){
-    if (m_ShooterSub.ShooterVelocity() >= 2000)
-    { 
-      agitator.set(speed);
-    }
-    else {
-      agitator.set(0);
-    }
+    // if (m_ShooterSub.ShooterVelocity() >= 2000)
+    // { 
+    //   agitator.set(speed);
+    // }
+    // else {
+    //   agitator.set(0);
+    // }
   }
 } 
 

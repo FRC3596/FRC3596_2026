@@ -34,92 +34,98 @@ import frc.robot.commands.XboxDriveCom;
 import frc.robot.subsystems.SwerveSub;
 
 public class RobotContainer {
-    private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
   private final IntakeSub m_intakeSub = new IntakeSub();
   private final ShooterSub m_shooterSub = new ShooterSub();
   private final FeederSub m_FeederSub = new FeederSub();
-    private final StorageSub m_storageSub = new StorageSub(m_shooterSub);
+  private final StorageSub m_storageSub = new StorageSub(m_shooterSub);
 
-  private final CommandXboxController m_driverController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
+  private final CommandXboxController m_driverController = new CommandXboxController(
+    Constants.DriverStation.xboxControllerID);
   private final CommandJoystick m_LeftJoystick = new CommandJoystick(Constants.DriverStation.leftFlightStickID);
   private final CommandJoystick m_RightJoystick = new CommandJoystick(Constants.DriverStation.rightFlightStickID);
-  private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub, Constants.Manipulator.autoAgitatorSpeed);
-  //private final AgitatorCom m_invertedAgitatorCom = new AgitatorCom(m_storageSub, -Constants.Manipulator.autoAgitatorSpeed);
-  private final IntakeCom m_intakeBackCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedIn, Constants.Manipulator.intakeRollerSpeed);
-  private final IntakeCom m_intakeForwardCom = new IntakeCom(m_intakeSub,Constants.Manipulator.intakeSpeedOut, Constants.Manipulator.intakeRollerSpeed);
-    private final IntakeCom m_intakeNotmoving= new IntakeCom(m_intakeSub,0, Constants.Manipulator.intakeRollerSpeed);
+  // private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub,
+  // Constants.Manipulator.autoAgitatorSpeed);
+  // private final AgitatorCom m_invertedAgitatorCom = new
+  // AgitatorCom(m_storageSub, -Constants.Manipulator.autoAgitatorSpeed);
+
+  private final IntakeCom m_intakeBackCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedIn,
+      Constants.Manipulator.intakeRollerSpeed);
+  private final IntakeCom m_intakeForwardCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedOut,
+      Constants.Manipulator.intakeRollerSpeed);
+  private final IntakeCom m_intakeNotmoving = new IntakeCom(m_intakeSub, 0, Constants.Manipulator.intakeRollerSpeed);
+
+  // private final IntakeCom m_intakeDownCom = new IntakeCom(m_intakeSub,
+  // Constants.Manipulator.intakeDownRotations);
+  // private final IntakeCom m_intakeUpCom = new IntakeCom(m_intakeSub,
+  // Constants.Manipulator.intakeUpRotations);
+
+  private final FeederCom m_FeederCom = new FeederCom(m_FeederSub, Constants.Manipulator.FeederSpeed);
+  private final FeederCom m_FeederComReversed = new FeederCom(m_FeederSub, -Constants.Manipulator.FeederSpeed);
 
   private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
-  private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.MediumShooterSpeed); 
+  private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.MediumShooterSpeed);
   private final ShooterCom m_shooterOff = new ShooterCom(m_shooterSub, 0);
-  // private final RollerCom m_RollerInCom = new RollerCom(m_intakeSub, Constants.Manipulator.autoIntakeSpeed);
-  // private final RollerCom m_RollerOutCom = new RollerCom(m_intakeSub, -Constants.Manipulator.autoIntakeSpeed);
-  private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
-  // private final ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);;  //private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
-  //private final ClimberSub m_ClimberSub = new ClimberSub();
+  // private final RollerCom m_RollerInCom = new RollerCom(m_intakeSub,
+  // Constants.Manipulator.autoIntakeSpeed);
+  // private final RollerCom m_RollerOutCom = new RollerCom(m_intakeSub,
+  // -Constants.Manipulator.autoIntakeSpeed);
+
+  // private final ShooterIdleCom Idle = new ShooterIdleCom(m_shooterSub);;
+  // //private final FeederCom m_FeederCom = new FeederCom(m_FeederSub);
+  // private final ClimberSub m_ClimberSub = new ClimberSub();
 
   private final SwerveSub swerve = new SwerveSub();
   CommandXboxController xboxController = new CommandXboxController(Constants.DriverStation.xboxControllerID);
   XboxDriveCom teleopXBoxDriveCommand = new XboxDriveCom(swerve, xboxController);
   FlyStickDrive teleopFlyStickDriveCommand = new FlyStickDrive(swerve, m_LeftJoystick, m_RightJoystick);
 
-
   public RobotContainer() {
 
     configureBindings();
-  swerve.setDefaultCommand(teleopFlyStickDriveCommand);
-   m_shooterSub.setDefaultCommand(m_shooterOff);
-   m_intakeSub.setDefaultCommand(m_intakeNotmoving);
+
+    swerve.setDefaultCommand(teleopFlyStickDriveCommand);
+
+    m_shooterSub.setDefaultCommand(m_shooterOff);
+    m_intakeSub.setDefaultCommand(m_intakeNotmoving);
     autoChooser = AutoBuilder.buildAutoChooser();
     NamedCommands.registerCommand("FarFire", m_shooterComFar);
-    NamedCommands.registerCommand("CloseFire", m_shooterComFar);
+    NamedCommands.registerCommand("CloseFire", m_shooterComClose);
     NamedCommands.registerCommand("Off", m_shooterOff);
-    NamedCommands.registerCommand("Agitate", m_agitatorCom);
-
+    NamedCommands.registerCommand("Agitate", m_FeederCom);
     SmartDashboard.putData("Auto Chooser", autoChooser);
-    
 
   }
-
-  
-
 
   private void configureBindings() {
     m_driverController.b().whileTrue(m_shooterComFar);
     m_driverController.y().whileTrue(m_shooterComClose);
     m_driverController.x().whileTrue(m_shooterOff);
-    
-    m_driverController.leftBumper().whileTrue(m_intakeBackCom);
 
-  
+    m_driverController.leftBumper().whileTrue(m_intakeBackCom);
 
     m_driverController.rightBumper().whileTrue(m_intakeForwardCom);
 
     m_RightJoystick.button(3).onTrue(new InstantCommand(swerve::resetPose));
-    
 
+    // m_driverController.a().whileTrue(m_agitatorCom);
+    // m_driverController.a().whileTrue(m_FeederCom);
 
+    // m_driverController.button(9).whileTrue(m_invertedAgitatorCom);
+    // m_driverController.rightTrigger().whileTrue(m_FeederCom); */
 
-   // m_driverController.a().whileTrue(m_agitatorCom);
-   // m_driverController.a().whileTrue(m_FeederCom);
-
-    //m_driverController.rightBumper().whileTrue(m_intakeDownCom);
-    //m_driverController.leftBumper().whileTrue(m_intakeUpCom);
-    //m_driverController.axisGreaterThan(3, 0.5).whileTrue(m_RollerInCom);
-    //m_driverController.axisGreaterThan(2, 0.5).whileTrue(m_RollerOutCom);
-    //m_driverController.button(9).whileTrue(m_invertedAgitatorCom);
-   // m_driverController.rightTrigger().whileTrue(m_FeederCom);  */
-
-    //  m_driverController.povUp()
-    //      .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
+    // m_driverController.povUp()
+    // .onTrue(new InstantCommand(() ->
+    // m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsUp)));
     // m_driverController.povDown()
-    //     .onTrue(new InstantCommand(() -> m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
+    // .onTrue(new InstantCommand(() ->
+    // m_ClimberSub.motorPoseSet(Constants.Manipulator.climberRotationsDown)));
   }
+
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
 
-    // swerve.setDefaultCommand(teleopDriveCommand);
-   // m_shooterSub.setDefaultCommand(Idle);
+    // m_shooterSub.setDefaultCommand(Idle);
   }
-  
+
 }
