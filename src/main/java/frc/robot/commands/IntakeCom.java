@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import com.revrobotics.spark.SparkClosedLoopController;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.utils.Constants;
@@ -18,7 +19,6 @@ public class IntakeCom extends Command {
   private double m_rollerSpeed;
 
   // private final double m_PivotSpeed;
-
   
  
   //RyAn Wsa HerE
@@ -50,10 +50,12 @@ public class IntakeCom extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putNumber("command target intake speed" , m_intakeSpeed);
+
     m_intakeSub.runIntake(m_intakeSpeed, m_rollerSpeed);
    
-    if(m_intakeSub.p1encoder.getPosition()< Constants.Manipulator.minPoseForRollerAndLimSwitch && m_intakeSub.limitswitchpressed)
-    m_intakeSub.p1encoder.setPosition(0);
+    // if(m_intakeSub.p1encoder.getPosition()< Constants.Manipulator.minPoseForRollerAndLimSwitch && m_intakeSub.limitswitchpressed)
+    // m_intakeSub.p1encoder.setPosition(0);
     
   }
 //   public void execute(){

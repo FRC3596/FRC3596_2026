@@ -54,6 +54,7 @@ public class ShooterSub extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Velocity", encoder.getVelocity());
     SmartDashboard.putNumber("PID Shooter out", motor1.getAppliedOutput());
     SmartDashboard.putNumber("Shooter Target Velocity (RPM)", PID.getSetpoint());
+  
     // This method will be called once per scheduler run
   }
 

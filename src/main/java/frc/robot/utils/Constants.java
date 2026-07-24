@@ -1,6 +1,7 @@
 package frc.robot.utils;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Constants {
 
@@ -22,25 +23,28 @@ public class Constants {
         public static final int BLAngle = 6;
         public static final int BLDrive = 5;
         // Intake 11-20
-        public static final int RollerIntake1 = 11;
-        public static final int RollerIntake2 = 12;
+        public static final int loweragitator = 11;
 
-        public static final int pivotIntake1 = 13;
-        public static final int pivotIntake2 = 14;
+        public static final int RollerIntake1 = 14;
 
+        public static final int Intake1 = 12;
+        public static final int Intake2 = 13;
+
+  
+        
         // Agitators 21-30
         public static final int agitator = 21;
 
         // Shooters 31-40
-        public static final int feeder = 31;
+        public static final int upperagitator = 31;
+        //upper agitator is responsible for feeding, but also intake
         public static final int shooter1 = 32;
         public static final int shooter2 = 33;
         // Climb 41-50
         public static final int climb1 = 41;
         public static final int climb2 = 42;
 
-        public static final int loweragitator = 0;
-        public static final int upperagitator = 0;
+      
 
     }
 
@@ -65,7 +69,9 @@ public class Constants {
         public static final double climberRProportion = 0;
         public static final double climberRDerivative = 0;
         public static final double climberRIntegral = 0;
-        public static final double intakeRollerSpeed = 0;
+
+       
+
         public static final double IntakeIntegral = 0;
         public static final double IntakeProportion = 0;
         public static final double IntakeDerivative = 0;
@@ -80,23 +86,28 @@ public class Constants {
         public static final double FeederSpeed = .72;
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
-        public static final double CurrentLim = 10;
-         public static final double minPoseForRollerAndLimSwitch = 0;
+        public static final double CurrentLim = 20;
+         public static final double minPoseForRollerAndLimSwitch = 0.4;
         public static final double currentDerivLim = 10;
-        public static final double maxIntakePose = 0;
-        public static final double minIntakePose = 0;
+
+
+        public static final double maxIntakePose = 2;
+        public static final double minIntakePose = .16;
+
         public static final int maxPivotCurrentLimit = 5;
     
 
         public static final double minEncoderpose = -0.4142857909202576;
 //intake speeds
-        public static final double intakeSpeedOut = 0;
-         public static final double intakeSpeedIn = 0;
+        public static final double intakeSpeedOut = 0.5;
+         public static final double intakeSpeedIn = -0.5;
          
-         public static final double agitatorSpeed = 0;
+         public static final double agitatorSpeed = 0.5;
          public static final double minShooterSpeed = 0;
 
-public static final int LimSwitchInput = 0;
+          public static final double intakeRollerSpeed = .5;
+public static final DigitalInput LimSwitchInput = new DigitalInput(0);
+
         public class FieldConstants {
 
             public static final double redGoalY = 0;

@@ -92,6 +92,8 @@
 
 package frc.robot.subsystems;
 
+
+
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
@@ -109,20 +111,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeSub extends SubsystemBase {
 
-  private final SparkMax Roller1 = new SparkMax(Constants.CANBus.RollerIntake1, MotorType.kBrushless);
+private final SparkMax Roller1 = new SparkMax(Constants.CANBus.RollerIntake1, MotorType.kBrushless);
+private final SparkMax Intake1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
+private final SparkMax Intake2 = new SparkMax(Constants.CANBus.Intake2, MotorType.kBrushless);
 
   private SparkMaxConfig R1Config = new SparkMaxConfig();
-
-  private final SparkMax Roller2 = new SparkMax(Constants.CANBus.RollerIntake2, MotorType.kBrushless);
-
-  private SparkMaxConfig R2Config = new SparkMaxConfig();
-
-  private final SparkMax Intake1 = new SparkMax(Constants.CANBus.pivotIntake1, MotorType.kBrushless);
-
   private SparkMaxConfig p1Config = new SparkMaxConfig();
-
-private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, MotorType.kBrushless);
-
   private SparkMaxConfig p2Config = new SparkMaxConfig();
 
   public final RelativeEncoder p1encoder = Intake1.getEncoder();
@@ -131,23 +125,21 @@ private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, Mot
   private double tripOutput;
   public boolean trip;
   public boolean limitswitchpressed;
-  public double current;
-  public DigitalInput limSwitchInput;
+  
+  public DigitalInput limSwitchInput = Constants.Manipulator.LimSwitchInput;
 
   public IntakeSub() {
 
-    p1Config.smartCurrentLimit(20);
+    //p1Config.smartCurrentLimit(20);
     Intake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    p2Config.follow(Intake1, true);
+    p2Config.follow(Intake1, true);//ToDO set back to true
     Intake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    R1Config.smartCurrentLimit(20);
+    //R1Config.smartCurrentLimit(20);
     Roller1.configure(R1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
-    R2Config.follow(Roller1, true);
-    Roller2.configure(R2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-    limSwitchInput = new DigitalInput(Constants.Manipulator.LimSwitchInput);
+ 
 
     // TODO, CHECK IF GEARBOX MATCHES INVERTED CONFIGURATION
   }
@@ -160,14 +152,16 @@ private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, Mot
     } else {
       trip = false;
     } // TODO lim switch should be wired to normally open
-    if (limSwitchInput.get()) {
+    if (limSwitchInput.get() == false) {
       limitswitchpressed = true;
     } else {
       limitswitchpressed = false;
     }
-    // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Pivot encoder", p1encoder.getPosition());
-     SmartDashboard.putNumber("Output Current", Roller1.getOutputCurrent());
+    // This method will be called once per scheduler run);
+    SmartDashboard.putNumber("Intake encoder position", p1encoder.getPosition());
+     SmartDashboard.putNumber("Intake encoder velocity", p1encoder.getVelocity());
+     SmartDashboard.putNumber(" Intake Output Current", Intake1.getOutputCurrent());
+     SmartDashboard.putBoolean("Limit switch", limitswitchpressed );
 
     // pastCurrentOutput = Intake1.getOutputCurrent();
     // pastPosition = p1encoder.getPosition();
@@ -175,23 +169,33 @@ private final SparkMax Intake2 = new SparkMax(Constants.CANBus.pivotIntake2, Mot
   }
 
   public void runIntake(double intakeSpeed, double rollerSpeed) {
-    if(trip){
-      Intake1.set(0);
-       Roller1.set(0);
-    }
-    else if (((intakeSpeed > 0) && p1encoder.getPosition() >= Constants.Manipulator.maxIntakePose)) {
-      Intake1.set(0);
+    Intake1.set(intakeSpeed);
+    Roller1.set(rollerSpeed);
+    SmartDashboard.putNumber("Subsystem set intake speed", intakeSpeed);
+  }
+    // if(trip){
+    //   Intake1.set(0);
+    //    Roller1.set(0);
+    // }
+    // else 
+   
+//     if (((intakeSpeed > 0) && p1encoder.getPosition() >= Constants.Manipulator.maxIntakePose)) {
+//       Intake1.set(0);
      
 
-    }
-    else if (((intakeSpeed < 0) && p1encoder.getPosition() <= Constants.Manipulator.minIntakePose)){
-         Intake1.set(0);
-          Roller1.set(0);
-    }
-else{
-  Intake1.set(intakeSpeed);
-   Roller1.set(rollerSpeed);
-}
+//     }
+//     else if (((intakeSpeed < 0) && p1encoder.getPosition() <= Constants.Manipulator.minIntakePose)){
+//          Intake1.set(0);
+//           Roller1.set(0);
+//     }
+// else{
+  
+//  if ( p1encoder.getPosition() < Constants.Manipulator.minPoseForRollerAndLimSwitch ){
+//       Roller1.set(0);
+//     }
+//     else{
+//       Roller1.set(rollerSpeed);
+//     }
 }
 
   // private final SparkMax Roller1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
@@ -218,7 +222,7 @@ else{
     // p2Config.smartCurrentLimit(Constants.Manipulator.maxPivotCurrentLimit);
     // // p2Config.apply(PIDConfig);
     // pivotIntake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
-  }
+  
 
   // @Override
   // public void periodic() {
