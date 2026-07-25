@@ -25,7 +25,7 @@ public class IntakeCom extends Command {
   /** Creates a new ManualIntakeCom. */
   public IntakeCom(IntakeSub intakeSub, double intakeSpeed, double rollerSpeed) {
     m_intakeSub = intakeSub;
-    m_rollerSpeed = rollerSpeed;
+    // m_rollerSpeed = rollerSpeed;
     m_intakeSpeed = intakeSpeed;
   // public IntakeCom(IntakeSub intakeSub, double PivotSpeed) {
   //   m_intakeSub = intakeSub;
@@ -38,7 +38,7 @@ public class IntakeCom extends Command {
   @Override
   public void initialize() {
   
-    m_intakeSub.runIntake(0,0);
+    m_intakeSub.runIntake(0,0 );
 
 
     
@@ -50,12 +50,13 @@ public class IntakeCom extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("command target intake speed" , m_intakeSpeed);
+    
 
-    m_intakeSub.runIntake(m_intakeSpeed, m_rollerSpeed);
-   
-    // if(m_intakeSub.p1encoder.getPosition()< Constants.Manipulator.minPoseForRollerAndLimSwitch && m_intakeSub.limitswitchpressed)
-    // m_intakeSub.p1encoder.setPosition(0);
+    m_intakeSub.runIntake(m_intakeSpeed ,m_rollerSpeed);
+    SmartDashboard.putNumber("command target intake speed" , m_intakeSpeed);
+   SmartDashboard.putNumber("command roller speed", m_rollerSpeed);
+     if(Math.abs(m_intakeSub.p1encoder.getPosition())< (Constants.Manipulator.minPoseForRollerAndLimSwitch) && m_intakeSub.limitswitchpressed)
+    m_intakeSub.p1encoder.setPosition(0);
     
   }
 //   public void execute(){
@@ -87,7 +88,7 @@ public class IntakeCom extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intakeSub.runIntake(0,0);
+    m_intakeSub.runIntake(0 ,0);
   }
   // Returns true when the command should end.
   @Override

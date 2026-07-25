@@ -37,6 +37,7 @@ import frc.robot.commands.ShooterIdleCom;
 import frc.robot.commands.XboxDriveCom;
 import frc.robot.subsystems.SwerveSub;
 import frc.robot.commands.ResetEncoder;
+
 public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
   private final IntakeSub m_intakeSub = new IntakeSub();
@@ -45,7 +46,7 @@ public class RobotContainer {
   private final StorageSub m_StorageSub = new StorageSub(m_shooterSub);
 
   private final CommandXboxController m_driverController = new CommandXboxController(
-    Constants.DriverStation.xboxControllerID);
+      Constants.DriverStation.xboxControllerID);
   private final CommandJoystick m_LeftJoystick = new CommandJoystick(Constants.DriverStation.leftFlightStickID);
   private final CommandJoystick m_RightJoystick = new CommandJoystick(Constants.DriverStation.rightFlightStickID);
   // private final AgitatorCom m_agitatorCom = new AgitatorCom(m_storageSub,
@@ -60,15 +61,18 @@ public class RobotContainer {
       Constants.Manipulator.intakeRollerSpeed);
 
   private final IntakeCom m_intakeNotmoving = new IntakeCom(m_intakeSub, 0, Constants.Manipulator.intakeRollerSpeed);
-private final AgitatorCom m_runAgitator = new AgitatorCom(m_StorageSub, Constants.Manipulator.agitatorSpeed);
-private final ResetEncoder m_resetencoder = new ResetEncoder(m_intakeSub);
+  
+  private final AgitatorCom m_runAgitator = new AgitatorCom(m_StorageSub, Constants.Manipulator.agitatorSpeed);
+  private final ResetEncoder m_resetencoder = new ResetEncoder(m_intakeSub);
   // private final IntakeCom m_intakeDownCom = new IntakeCom(m_intakeSub,
   // Constants.Manipulator.intakeDownRotations);
   // private final IntakeCom m_intakeUpCom = new IntakeCom(m_intakeSub,
   // Constants.Manipulator.intakeUpRotations);
 
-  // private final FeederCom m_FeederCom = new FeederCom(m_FeederSub, Constants.Manipulator.FeederSpeed);
-  // private final FeederCom m_FeederComReversed = new FeederCom(m_FeederSub, -Constants.Manipulator.FeederSpeed);
+  // private final FeederCom m_FeederCom = new FeederCom(m_FeederSub,
+  // Constants.Manipulator.FeederSpeed);
+  // private final FeederCom m_FeederComReversed = new FeederCom(m_FeederSub,
+  // -Constants.Manipulator.FeederSpeed);
 
   private final ShooterCom m_shooterComFar = new ShooterCom(m_shooterSub, Constants.Manipulator.LongShooterSpeed);
   private final ShooterCom m_shooterComClose = new ShooterCom(m_shooterSub, Constants.Manipulator.MediumShooterSpeed);
@@ -92,10 +96,9 @@ private final ResetEncoder m_resetencoder = new ResetEncoder(m_intakeSub);
     configureBindings();
 
     swerve.setDefaultCommand(teleopFlyStickDriveCommand);
-
     m_shooterSub.setDefaultCommand(m_shooterOff);
     m_intakeSub.setDefaultCommand(m_intakeNotmoving);
-    
+
     autoChooser = AutoBuilder.buildAutoChooser();
     NamedCommands.registerCommand("FarFire", m_shooterComFar);
     NamedCommands.registerCommand("CloseFire", m_shooterComClose);

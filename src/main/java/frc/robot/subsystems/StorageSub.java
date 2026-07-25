@@ -25,7 +25,11 @@ public class StorageSub extends SubsystemBase {
   private final ShooterSub m_ShooterSub;
   public StorageSub(ShooterSub shooterSub) {
     m_ShooterSub = shooterSub;
-
+//Intake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    loweragitator.configure(loweragitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+    upperagitatorConfig.follow(loweragitator, true);
+    upperagitator.configure(upperagitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+   
     // agitator.configure(agitatorConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
   }
@@ -37,14 +41,13 @@ public class StorageSub extends SubsystemBase {
 
 
   public void runAgitator(double agitatorSpeed){
-   if(m_ShooterSub.ShooterVelocity() < Constants.Manipulator.minShooterSpeed){
-    loweragitator.set(0);
-  upperagitator.set(0);
+  if(m_ShooterSub.ShooterVelocity() < Constants.Manipulator.minShooterSpeed){
+     loweragitator.set(0);
    }
   else{
   loweragitator.set(agitatorSpeed);
-  upperagitator.set(agitatorSpeed);
   }
+  SmartDashboard.putNumber("subsystem agitaor speed", agitatorSpeed);
 } 
 
 }

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.Constants;
@@ -36,6 +37,7 @@ public class AgitatorCom extends Command {
   @Override
   public void execute() {
     m_storageSub.runAgitator(m_speed);
+    SmartDashboard.putNumber("command set agitator speed", m_speed);
   }
 
   // Called once the command ends or is interrupted.

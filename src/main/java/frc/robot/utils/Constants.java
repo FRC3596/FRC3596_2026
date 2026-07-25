@@ -25,6 +25,7 @@ public class Constants {
         // Intake 11-20
         public static final int loweragitator = 11;
 
+
         public static final int RollerIntake1 = 14;
 
         public static final int Intake1 = 12;
@@ -87,7 +88,7 @@ public class Constants {
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
         public static final double CurrentLim = 20;
-         public static final double minPoseForRollerAndLimSwitch = 0.4;
+         public static final double minPoseForRollerAndLimSwitch = 0.6;
         public static final double currentDerivLim = 10;
 
 
@@ -99,13 +100,13 @@ public class Constants {
 
         public static final double minEncoderpose = -0.4142857909202576;
 //intake speeds
-        public static final double intakeSpeedOut = 0.5;
-         public static final double intakeSpeedIn = -0.5;
+        public static final double intakeSpeedOut = -0.7;
+         public static final double intakeSpeedIn = 0.7;
          
          public static final double agitatorSpeed = 0.5;
-         public static final double minShooterSpeed = 0;
+         public static final double minShooterSpeed = 1000;
 
-          public static final double intakeRollerSpeed = .5;
+          public static final double intakeRollerSpeed = .8;
 public static final DigitalInput LimSwitchInput = new DigitalInput(0);
 
         public class FieldConstants {
