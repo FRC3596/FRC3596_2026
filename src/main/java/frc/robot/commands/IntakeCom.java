@@ -23,7 +23,7 @@ public class IntakeCom extends Command {
  
   //RyAn Wsa HerE
   /** Creates a new ManualIntakeCom. */
-  public IntakeCom(IntakeSub intakeSub, double intakeSpeed, double rollerSpeed) {
+  public IntakeCom(IntakeSub intakeSub, double intakeSpeed) {
     m_intakeSub = intakeSub;
     // m_rollerSpeed = rollerSpeed;
     m_intakeSpeed = intakeSpeed;
@@ -38,7 +38,7 @@ public class IntakeCom extends Command {
   @Override
   public void initialize() {
   
-    m_intakeSub.runIntake(0,0 );
+    m_intakeSub.runIntake(0);
 
 
     
@@ -52,10 +52,10 @@ public class IntakeCom extends Command {
   public void execute() {
     
 
-    m_intakeSub.runIntake(m_intakeSpeed ,m_rollerSpeed);
+    m_intakeSub.runIntake(m_intakeSpeed);
     SmartDashboard.putNumber("command target intake speed" , m_intakeSpeed);
    SmartDashboard.putNumber("command roller speed", m_rollerSpeed);
-     if(Math.abs(m_intakeSub.p1encoder.getPosition())< (Constants.Manipulator.minPoseForRollerAndLimSwitch) && m_intakeSub.limitswitchpressed)
+     if(Math.abs(m_intakeSub.p1encoder.getPosition())< (Constants.Manipulator.minPoseForLimitswitch) && m_intakeSub.limitswitchpressed)
     m_intakeSub.p1encoder.setPosition(0);
     
   }
@@ -88,7 +88,7 @@ public class IntakeCom extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intakeSub.runIntake(0 ,0);
+    // m_intakeSub.runIntake(0 ,0);
   }
   // Returns true when the command should end.
   @Override

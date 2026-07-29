@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 //import frc.robot.subsystems.ClimberSub;
 //import frc.robot.subsystems.FeederSub;
 import frc.robot.subsystems.IntakeSub;
+import frc.robot.subsystems.RollerSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.StorageSub;
 import frc.robot.utils.Constants;
@@ -37,6 +38,7 @@ import frc.robot.commands.ShooterIdleCom;
 import frc.robot.commands.XboxDriveCom;
 import frc.robot.subsystems.SwerveSub;
 import frc.robot.commands.ResetEncoder;
+import frc.robot.commands.RollerCom;
 
 public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
@@ -44,7 +46,7 @@ public class RobotContainer {
   private final ShooterSub m_shooterSub = new ShooterSub();
   // private final FeederSub m_FeederSub = new FeederSub();
   private final StorageSub m_StorageSub = new StorageSub(m_shooterSub);
-
+private final RollerSub m_RollerSub = new RollerSub();
   private final CommandXboxController m_driverController = new CommandXboxController(
       Constants.DriverStation.xboxControllerID);
   private final CommandJoystick m_LeftJoystick = new CommandJoystick(Constants.DriverStation.leftFlightStickID);
@@ -54,14 +56,14 @@ public class RobotContainer {
   // private final AgitatorCom m_invertedAgitatorCom = new
   // AgitatorCom(m_storageSub, -Constants.Manipulator.autoAgitatorSpeed);
 
-  private final IntakeCom m_intakeinCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedIn,
-      Constants.Manipulator.intakeRollerSpeed);
+  private final IntakeCom m_intakeinCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedIn);
 
-  private final IntakeCom m_intakeoutCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedOut,
-      Constants.Manipulator.intakeRollerSpeed);
+  private final IntakeCom m_intakeoutCom = new IntakeCom(m_intakeSub, Constants.Manipulator.intakeSpeedOut);
 
-  private final IntakeCom m_intakeNotmoving = new IntakeCom(m_intakeSub, 0, Constants.Manipulator.intakeRollerSpeed);
-  
+  private final IntakeCom m_intakeNotmoving = new IntakeCom(m_intakeSub, 0);
+
+  private final RollerCom m_RollerMoving = new RollerCom(m_intakeSub, m_RollerSub, Constants.Manipulator.intakeRollerSpeed);
+
   private final AgitatorCom m_runAgitator = new AgitatorCom(m_StorageSub, Constants.Manipulator.agitatorSpeed);
   private final ResetEncoder m_resetencoder = new ResetEncoder(m_intakeSub);
   // private final IntakeCom m_intakeDownCom = new IntakeCom(m_intakeSub,
@@ -98,11 +100,12 @@ public class RobotContainer {
     swerve.setDefaultCommand(teleopFlyStickDriveCommand);
     m_shooterSub.setDefaultCommand(m_shooterOff);
     m_intakeSub.setDefaultCommand(m_intakeNotmoving);
-
+    // m_RollerSub.setDefaultCommand(m_RollerMoving);
     autoChooser = AutoBuilder.buildAutoChooser();
     NamedCommands.registerCommand("FarFire", m_shooterComFar);
     NamedCommands.registerCommand("CloseFire", m_shooterComClose);
     NamedCommands.registerCommand("Off", m_shooterOff);
+    NamedCommands.registerCommand("Agitate", m_runAgitator);
     // NamedCommands.registerCommand("Agitate", m_FeederCom);
     SmartDashboard.putData("Auto Chooser", autoChooser);
 

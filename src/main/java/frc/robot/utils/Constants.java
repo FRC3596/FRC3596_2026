@@ -88,7 +88,7 @@ public class Constants {
         public static final double climberRotationsUp = 0;
         public static final double climberRotationsDown = 0;
         public static final double CurrentLim = 20;
-         public static final double minPoseForRollerAndLimSwitch = 0.6;
+        
         public static final double currentDerivLim = 10;
 
 
@@ -106,7 +106,10 @@ public class Constants {
          public static final double agitatorSpeed = 0.5;
          public static final double minShooterSpeed = 1000;
 
-          public static final double intakeRollerSpeed = .8;
+          public static final double intakeRollerSpeed = 0.5;
+
+           public static final double minPoseForRoller = 0.6;
+             public static final double minPoseForLimitswitch = 0.16;
 public static final DigitalInput LimSwitchInput = new DigitalInput(0);
 
         public class FieldConstants {

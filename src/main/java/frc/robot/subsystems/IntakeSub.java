@@ -100,8 +100,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class IntakeSub extends SubsystemBase {
 
-  private final SparkMax Roller1 = new SparkMax(Constants.CANBus.RollerIntake1, MotorType.kBrushless);
-  private SparkMaxConfig R1Config = new SparkMaxConfig();
+
   private final SparkMax Intake1 = new SparkMax(Constants.CANBus.Intake1, MotorType.kBrushless);
   private SparkMaxConfig p1Config = new SparkMaxConfig();
   private final SparkMax Intake2 = new SparkMax(Constants.CANBus.Intake2, MotorType.kBrushless);
@@ -118,14 +117,14 @@ public class IntakeSub extends SubsystemBase {
 
   public IntakeSub() {
 
-    // p1Config.smartCurrentLimit(20);
+    p1Config.smartCurrentLimit(20);
     Intake1.configure(p1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
     p2Config.follow(Intake1, true);// ToDO set back to true
     Intake2.configure(p2Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
     // R1Config.smartCurrentLimit(20);
-    Roller1.configure(R1Config, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
+   
 
     // TODO, CHECK IF GEARBOX MATCHES INVERTED CONFIGURATION
   }
@@ -154,18 +153,15 @@ public class IntakeSub extends SubsystemBase {
 
   }
 
-  public void runIntake(double intakeSpeed, double rollerSpeed) {
+  public void runIntake(double intakeSpeed) {
     Intake1.set(intakeSpeed);
    
-    if ( Math.abs(p1encoder.getPosition()) <
-    Constants.Manipulator.minPoseForRollerAndLimSwitch){
-    Roller1.set(0);
-    }
-    else{
-    Roller1.set(rollerSpeed);
-    }
+   
     SmartDashboard.putNumber("Subsystem set intake speed", intakeSpeed);
-    SmartDashboard.putNumber("Subsystem set roller speed", rollerSpeed);
+  
+  }
+  public double ReturnEncoder(){
+    return p1encoder.getPosition();
   }
   // if(trip){
   // Intake1.set(0);
